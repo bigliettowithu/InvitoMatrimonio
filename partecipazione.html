@@ -1,309 +1,360 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <!-- Inserisci nel <head> -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Invito 30 anni</title>
 
-<meta charset="UTF-8">
-<title>Invito di Matrimonio</title>
+  <!-- Font e icone -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- Font eleganti -->
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    /* BASE */
+    html, body{
+      margin:0;
+      padding:0;
+      width:100vw;
+      height:100vh;
+      overflow:hidden; /* niente scroll */
+      box-sizing:border-box;
+      font-family:'Playfair Display', serif;
+      color:#6B5D54;
+    }
+    *, *::before, *::after{ box-sizing:inherit; }
 
- <!-- Il tuo CSS -->
- <link rel="stylesheet" href="stile.css">
-<style>
+    /* STAGE */
+    .stage{
+      position:fixed;
+      inset:0;
+      overflow:hidden;
+    }
 
-.open-btn{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  padding:18px 40px;
-  border:1px solid #786a6a;
-  color:#786a6a;
-  font-size:22px;
-  cursor:pointer;
-  background:rgba(255,255,255,0.75);
-  z-index:5;
-}
+    /* SFONDO A TUTTA PAGINA */
+    .bg{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      z-index:0;
+      pointer-events:none;
+      user-select:none;
+      -webkit-user-drag:none;
+    }
 
-/* RSVP minimale */
-.rsvp-overlay {
-  position:absolute;
-  top:60%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:90%;
-  max-width:400px;
-  color:#786a6a;
-  text-align:center;
-  z-index:20;
-}
+    /* CONTENITORE SOPRA LO SFONDO */
+    .a4{
+      position:absolute;
+      inset:0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      z-index:1;
+      overflow:hidden;
+    }
 
-.rsvp-step1 div {
-  display: flex;
-  align-items: center;    /* centra verticalmente label e bottoni tra loro */
-  justify-content: center; /* centra orizzontalmente tutto il blocco nella pagina */
-  gap: 10px;               /* spazio tra label e bottoni */
-  margin-top: 20px;        /* opzionale: distanza dal bordo superiore */
-}
+    /* OVERLAY RSVP */
+    .rsvp-overlay{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      width:min(900px, 92vw);
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      z-index:2;
+    }
 
-.rsvp-step1 input {
-  width:100%;
-  border:none;
-  border-bottom:1px solid #786a6a;
-  background:transparent;
-  padding:8px 0;
-  font-size:1em;
-  margin-bottom:20px;
-  color:#786a6a;
-}
+    .rsvp-step1{
+      width:100%;
+      background:rgba(255,255,255,0.45);
+      backdrop-filter: blur(2px);
+      border:1px solid rgba(0,0,0,0.15);
+      border-radius:12px;
+      padding:18px;
+    }
 
-.rsvp-step1 button {
-  padding:10px 25px;
-  margin:0 10px;
-  border:1px solid #786a6a;
-  background:transparent;
-  color:#786a6a;
-  cursor:pointer;
-}
+    .rsvp-step1 input{
+      width:100%;
+      border:none;
+      border-bottom:1px solid #6B5D54;
+      background:transparent;
+      padding:10px 0;
+      font-size:clamp(18px, 3vh, 26px);
+      margin-bottom:18px;
+      color:#6B5D54;
+      outline:none;
+    }
 
-.rsvp-step1 button.enabled { opacity:1; }
-
-.rsvp-step2 {
-  display:none;
-  text-align:left;
-  margin-top:20px;
-}
-
-.rsvp-step2 input,
-.rsvp-step2 select,
-.rsvp-step2 textarea {
-  width:100%;
-  margin:5px 0;
-  padding:6px 0;
-  border:none;
-  border-bottom:1px solid #786a6a;
-  background:transparent;
-  color:#786a6a;
-}
-
-.rsvp-step2 button {
-  margin-top:10px;
-  padding:10px 25px;
-  border:1px solid #786a6a;
-  background:transparent;
-  color:#786a6a;
-  cursor:pointer;
-}
-
-.partecipante {
+    .rsvp-step1 div {
+  width: 100%;
   display: flex;
   align-items: center;
-  gap: 10px;               /* spazio tra elementi */
-  border: 1px solid #ccc;  /* unico bordo attorno al blocco */
-  padding: 8px;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  justify-content: center; /* tutto centrato */
+  gap: 20px;               /* spazio uniforme */
+  flex-wrap: nowrap;       /* TUTTO SU UNA RIGA */
 }
 
-.partecipante button {
-  background-color: transparent; /* niente colore di sfondo */
-  color: #333;                   /* testo discreto */
-  border: 1px solid #ccc;        /* bordo leggero per farlo sembrare un bottone */
-  padding: 4px 8px;
-  border-radius: 3px;
+.rsvp-step1 label {
+  font-size: clamp(18px, 2.6vh, 24px);
+  font-weight: 600;
+  white-space: nowrap; /* evita che vada a capo */
+}
+.rsvp-step1 button {
+  width: 100px;              /* UGUALI */
+  height: 50px;              /* UGUALI */
+  border: 1px solid #6B5D54;
+  background: transparent;
+  color: #6B5D54;
+  font-size: clamp(18px, 2.6vh, 22px);
   cursor: pointer;
+  padding: 0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.partecipante button:hover {
-  background-color: #f0f0f0;     /* leggero effetto hover */
+
+    .rsvp-step2{
+      display:none;
+      width:100%;
+      margin-top:14px;
+      text-align:left;
+      background:rgba(255,255,255,0.45);
+      backdrop-filter: blur(2px);
+      border:1px solid rgba(0,0,0,0.15);
+      border-radius:12px;
+      padding:18px;
+      font-size:clamp(16px, 2.6vh, 22px);
+    }
+
+    .rsvp-step2 label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:600;
+    }
+
+    .rsvp-step2 input,
+    .rsvp-step2 select,
+    .rsvp-step2 textarea{
+      font-size:clamp(16px, 2.6vh, 22px);
+      width:100%;
+      margin:8px 0;
+      padding:8px 0;
+      border:none;
+      border-bottom:1px solid #6B5D54;
+      background:transparent;
+      color:#6B5D54;
+      outline:none;
+    }
+
+    .rsvp-step2 button{
+      margin-top:12px;
+      padding:10px 22px;
+      border:1px solid #6B5D54;
+      background:transparent;
+      color:#6B5D54;
+      font-size:clamp(16px, 2.6vh, 22px);
+      cursor:pointer;
+      border-radius:10px;
+    }
+
+    /* PARTECIPANTI EXTRA */
+    #extraFields{ margin-top:10px; }
+
+    .partecipante{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      border:1px solid #6B5D54;
+      padding:8px;
+      border-radius:10px;
+      margin-bottom:10px;
+      background:rgba(255,255,255,0.25);
+    }
+
+    .partecipante input{
+      width:55%;
+      border:none;
+      border-bottom:1px solid #6B5D54;
+      background:transparent;
+      padding:6px 0;
+      outline:none;
+      font-size:clamp(14px, 2.2vh, 20px);
+    }
+
+    .partecipante select{
+      width:35%;
+      border:none;
+      border-bottom:1px solid #6B5D54;
+      background:transparent;
+      padding:6px 0;
+      outline:none;
+      font-size:clamp(14px, 2.2vh, 20px);
+    }
+
+    .partecipante .remove-btn{
+      background:transparent;
+      border:none;
+      font-size:28px;
+      line-height:1;
+      cursor:pointer;
+      padding:0 6px;
+    }
+
+    /* BOTTONE INDIETRO */
+ .action-buttons{
+  display:flex;
+  flex-direction:row;
+  justify-content:center;   /* 👈 QUESTO è quello che ti manca */
+  align-items:center;
+  gap:20px;
+
+  width:100%;
+  margin-top:30px;
 }
 
-.partecipante button.remove-btn {
-  background-color: transparent;  /* nessuno sfondo */
-  border: none;                   /* niente bordo */
-  color: #555;                    /* grigio scuro */
-  font-size: 1.2em;               /* dimensione visibile ma discreta */
-  cursor: pointer;
-  padding: 0 6px;
-  line-height: 1;
+.action-btn{
+  width:52px;
+  height:52px;
+  border-radius:12px;
+  background:#F8F5F0;
+  border:1px solid #D6C3A5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#6B5D54;
+  box-shadow:0 6px 16px rgba(0,0,0,0.10);
 }
-
-.partecipante button.remove-btn:hover {
-  color: #000;                    /* diventa più scura al passaggio del mouse */
-}
-
-</style>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const area = document.getElementById("click-area");
-    const text = document.getElementById("hidden-text");
-  
-    area.addEventListener("click", function() {
-      text.classList.add("show");
-    });
-  });
-  </script>
+  </style>
 </head>
 
 <body>
+  <div class="stage">
+    <!-- SFONDO FULLSCREEN -->
+    <img class="bg" src="sfondo1.jpg" alt="Sfondo invito">
 
-<div class="a4">
-  <div class="canvas">
-    <img src="sfondo.png" alt="">
-    
+    <!-- CONTENUTO SOPRA -->
+    <div class="a4">
+      <div class="rsvp-overlay">
+        <div class="rsvp-step1">
+          <input type="text" id="rsvpName" placeholder="Inserisci Nome e Cognome" oninput="checkName()">
+          <div>
+            <label>Parteciperai?</label>
+            <button id="yesBtn" onclick="showStep2(true)">Sì</button>
+            <button id="noBtn" onclick="sendNo()">No</button>
+          </div>
+        </div>
 
-  <!-- Scritta nascosta inizialmente -->
-  <div id="temporary-text" style="
-  position:absolute;
-  top:70%;
-  left:50%;
-  transform: translate(-50%, -50%);
-  font-size:3vw;
-  text-align:center;
-  color: #786a6a;
-  font-family: 'Playfair Display', serif;
-  display:none;
-  z-index:10;
-">
-Non potevamo immaginare il nostro giorno speciale senza condividere la gioia con voi, che avete sempre fatto parte delle nostre vite e dei nostri ricordi più preziosi.
+        <div class="rsvp-step2" id="step2">
+          <label>Parteciperai da solo/a o in compagnia?</label>
+          <select id="compagnia" onchange="toggleExtra()">
+            <option value="solo">Solo/a</option>
+            <option value="compagnia">In compagnia</option>
+          </select>
 
-</div>
+          <div id="extraFields" style="display:none;">
+            <div id="partecipantiContainer"></div>
+            <button type="button" onclick="addPartecipante()">Aggiungi partecipante</button>
+          </div>
 
+          <button onclick="sendYes()">Invia</button>
+        </div>
 
- <div class="corpo" id="corpo">
-  <div class="rsvp-overlay">
-    <div class="rsvp-step1">
-      <input type="text" id="rsvpName" placeholder="Inserisci Nome e Cognome" oninput="checkName()">
-      <div>
-        <label>Parteciperai?</label>
-        <button id="yesBtn" onclick="showStep2(true)">Sì</button>
-        <button id="noBtn" onclick="sendNo()">No</button>
+        <div class="action-buttons">
+          <a href="index.html" class="action-btn" aria-label="Torna indietro">
+            <i class="fa-solid fa-arrow-left"></i>
+          </a>
+        </div>
       </div>
     </div>
 
-    <div class="rsvp-step2" id="step2">
-      <label>Partecipi da solo o in compagnia?</label>
-      <select id="compagnia" onchange="toggleExtra()">
-        <option value="solo">Solo/a</option>
-        <option value="compagnia">In compagnia</option>
-      </select>
-    
-      <div id="extraFields" style="display:none;">
-        <div id="partecipantiContainer"></div>
-        <button type="button" onclick="addPartecipante()">Aggiungi partecipante</button>
-      </div>
-    
-      <button onclick="sendYes()">Invia</button>
-    </div>
-  </div>
-  
-
-
+    <!-- LOGO -->
+   
   </div>
 
-  <div class="action-buttons">
-     <a href="home.html" class="action-btn"><i class="fa-solid fa-house"></i></a>
-  </div>
-
- <!-- Bottoni sotto il corpo del matrimonio -->
-</div>
-</div>
-
-<script>
-  document.addEventListener("contextmenu", e => e.preventDefault());
-  </script>
-
-<script>
-  const book = document.querySelector(".book");
-  const btn = document.getElementById("openBtn");
-  
-  btn.addEventListener("click", ()=>{
-    book.classList.add("open");
-    setTimeout(()=> book.remove(), 1600);
-  });
-  </script>
-
-<script>
-  function checkName(){
-    const name = document.getElementById("rsvpName").value.trim();
-    const yes = document.getElementById("yesBtn");
-    const no = document.getElementById("noBtn");
-    if(name.length>0){
-      yes.classList.add("enabled");
-      no.classList.add("enabled");
-    } else {
-      yes.classList.remove("enabled");
-      no.classList.remove("enabled");
+  <script>
+    function checkName(){
+      const name = document.getElementById("rsvpName").value.trim();
+      const yes = document.getElementById("yesBtn");
+      const no = document.getElementById("noBtn");
+      if(name.length>0){
+        yes.classList.add("enabled");
+        no.classList.add("enabled");
+      } else {
+        yes.classList.remove("enabled");
+        no.classList.remove("enabled");
+      }
     }
-  }
-  
-  function showStep2(isYes){
-    const name = document.getElementById("rsvpName").value.trim();
-    if(!name){ alert("Inserisci Nome e Cognome"); return; }
-    if(isYes){
-      document.getElementById("step2").style.display="block";
-    } else {
-      sendNo();
+
+    function showStep2(isYes){
+      const name = document.getElementById("rsvpName").value.trim();
+      if(!name){ alert("Inserisci Nome e Cognome"); return; }
+      if(isYes){
+        document.getElementById("step2").style.display="block";
+      } else {
+        sendNo();
+      }
+      document.querySelector(".rsvp-step1").style.display="none";
     }
-    document.querySelector(".rsvp-step1").style.display="none";
-  }
-  
-  function toggleExtra(){
-    const val = document.getElementById("compagnia").value;
-    document.getElementById("extraFields").style.display = (val==="compagnia") ? "block":"none";
-  }
-  function addPartecipante(){
-  const container = document.getElementById("partecipantiContainer");
 
-  const div = document.createElement("div");
-  div.classList.add("partecipante");
+    function toggleExtra(){
+      const val = document.getElementById("compagnia").value;
+      document.getElementById("extraFields").style.display = (val==="compagnia") ? "block" : "none";
+    }
 
-  div.innerHTML = `
-  <input type="text" placeholder="Nome partecipante">
-  <select>
-    <option value="adulto">Adulto</option>
-    <option value="bimbo03">Bambino 0-3</option>
-    <option value="bimbo3plus">Bambino 3+</option>
-  </select>
-  <button type="button" class="remove-btn" onclick="this.parentElement.remove()">×</button>
-`;
+    function addPartecipante(){
+      const container = document.getElementById("partecipantiContainer");
+      const div = document.createElement("div");
+      div.classList.add("partecipante");
 
-  container.appendChild(div);
-}
-  function sendNo(){
-    const name = document.getElementById("rsvpName").value.trim();
-    if(!name){ alert("Inserisci Nome e Cognome"); return; }
-    const msg = `Ciao! Sono ${name} e purtroppo non potrò partecipare al matrimonio 💌`;
-    window.open("https://wa.me/393892043551?text="+encodeURIComponent(msg), "_blank");
-  }
-  
-  function sendYes(){
-    const name = document.getElementById("rsvpName").value.trim();
-    if(!name){ alert("Inserisci Nome e Cognome"); return; }
-  
-    const extraElems = document.querySelectorAll("#partecipantiContainer .partecipante");
-    let extraMsg = "";
-  
-    extraElems.forEach(el => {
-      const n = el.querySelector("input").value.trim();
-      const t = el.querySelector("select").value;
-      if(n) extraMsg += `${n} (${t})\n`;
-    });
-  
-    const msg = `Conferma partecipazione matrimonio 💍
-  Nome: ${name}
-  Partecipanti aggiuntivi:
-  ${extraMsg}`;
-  
-    window.open("https://wa.me/393892043551?text="+encodeURIComponent(msg), "_blank");
-  }
+      div.innerHTML = `
+        <input type="text" placeholder="Nome Cognome">
+        <select>
+          <option value="adulto">Adulto/a</option>
+          <option value="bimbo03">Bambino/a 0-3</option>
+          <option value="bimbo03">Bambino/a 3-10</option>
+          <option value="bimbo3plus">Bambino/a 10+</option>
+        </select>
+        <button type="button" class="remove-btn" onclick="this.parentElement.remove()">×</button>
+      `;
+
+      container.appendChild(div);
+    }
+
+    function sendNo(){
+      const name = document.getElementById("rsvpName").value.trim();
+      if(!name){ alert("Inserisci Nome e Cognome"); return; }
+      const msg = `Ciao! Sono ${name} e purtroppo non potrò partecipare al matrimonio 💌`;
+      window.open("https://wa.me/393892043551?text="+encodeURIComponent(msg), "_blank");
+    }
+
+    function sendYes(){
+      const name = document.getElementById("rsvpName").value.trim();
+      if(!name){ alert("Inserisci Nome e Cognome"); return; }
+
+      const extraElems = document.querySelectorAll("#partecipantiContainer .partecipante");
+      let extraMsg = "";
+
+      extraElems.forEach(el => {
+        const n = el.querySelector("input").value.trim();
+        const t = el.querySelector("select").value;
+        if(n) extraMsg += `${n} (${t})\n`;
+      });
+
+      const msg = `Conferma partecipazione matrimonio 💍
+Nome: ${name}
+Partecipanti aggiuntivi:
+${extraMsg}`;
+
+      window.open("https://wa.me/393892043551?text="+encodeURIComponent(msg), "_blank");
+    }
   </script>
-  
-  
-  
 </body>
 </html>

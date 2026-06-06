@@ -11,53 +11,22 @@
 
 <style>
 
-html.locked,
-body.locked{
-  overflow: hidden !important;
-  height: 100%;
+html,body{
+  margin:0;
+  padding:0;
+  min-height:100%;
+  overflow-x:hidden;
+  overflow-y:auto;
+  background:#f3f1ed;
+  font-family:'Playfair Display', serif;
 }
 
-
-body.unlocked .a4 {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  overflow-x: hidden;
-
-  font-family: 'Playfair Display', serif;
-  background-attachment: scroll;
-  background-size: 100% 100%;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-
-  background: linear-gradient(
-    180deg,
-    #fcfaf6 0%,
-    #f5efe6 50%,
-    #ead9bd 100%
-  );
-
-  z-index: -1;
-}
 
 .book{
   position:absolute;
   inset:0;
   perspective:2200px;
   z-index:10;
-  overflow: hidden
 }
 
 /* PAGINE */
@@ -83,6 +52,47 @@ body::before {
   transform-origin:left center;
   z-index:3;
 }
+
+/* DESTRA */
+/* .page.right{
+  right:0;
+  background-position:right center;
+  transform-origin:left center;
+  z-index:3;
+} */
+
+/* .page.right {
+  right: 0;
+  z-index:3;
+  background:
+  
+    radial-gradient(
+      circle at 30% 25%,
+      rgba(255,255,255,0.25),
+      transparent 55%
+    ),
+
+   
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(0,0,0,0.25),
+      transparent 60%
+    ),
+
+   
+    linear-gradient(
+      120deg,
+      #3c6fa6 0%,
+      #2b4f78 45%,
+      #1c3552 100%
+    );
+
+  background-blend-mode: screen, multiply, normal;
+
+  box-shadow:
+    inset -18px 0 30px rgba(0,0,0,0.35),
+    inset 10px 0 18px rgba(255,255,255,0.08);
+} */
 
 .page.right {
   right: 0;
@@ -124,7 +134,16 @@ linear-gradient(
     inset 12px 0 22px rgba(255,255,255,0.10),
     0 0 30px rgba(0,0,0,0.20);
 }
-
+/* .rope {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 100%;
+  transform: translateX(-50%);
+  z-index: 20;
+  pointer-events: none;
+}
 
 /* fibra del cordoncino */
 .rope::before {
@@ -225,40 +244,97 @@ linear-gradient(
   z-index: 50;
   user-select: none;
   -webkit-user-drag: none;
-   filter:
-     sepia(15%)
-    saturate(25%)
-    brightness(70%)
-    contrast(120%);
 }
 
 /* INVITO */
 .a4{
-  position: relative;
-  width: 100%;
-  margin: 0 auto;
+   position: relative; 
+  inset: 0;
   z-index: 1;
-  opacity: 0;
+
+  background: linear-gradient(
+    180deg,
+    #fcfaf6 0%,
+    #f5efe6 50%,
+    #ead9bd 100%
+  );
 }
 
-.top-image{
-  position: relative;   /* 🔥 questo è il punto chiave */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 40vh;     /* scegli altezza */
+/* IMMAGINE */
+.canvas{
+  position:absolute;
+  inset:0;
+}
+
+/* IMMAGINE INTEGRATA */
+.canvas img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+
+  /* 🔥 chiave: fusione naturale */
+  filter: brightness(0.96) contrast(1.05) saturate(0.95);
+
+  /* fade ai bordi */
+  -webkit-mask-image: radial-gradient(
+    circle at center,
+    rgba(0,0,0,1) 55%,
+    rgba(0,0,0,0.6) 75%,
+    rgba(0,0,0,0) 100%
+  );
+
+  mask-image: radial-gradient(
+    circle at center,
+    rgba(0,0,0,1) 55%,
+    rgba(0,0,0,0.6) 75%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+.canvas::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.25), transparent 60%),
+    radial-gradient(circle at 70% 80%, rgba(0,0,0,0.18), transparent 60%),
+
+    /* effetto carta stampata */
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08), transparent 70%);
+
+  mix-blend-mode: soft-light;
 }
 
 .top-image img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* meglio di contain per effetto “banner” */
-  display: block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
 
-  filter: brightness(0.98) contrast(1.03);
+  filter:
+    brightness(0.98)
+    contrast(1.03);
+
+  /* bordi irregolari tipo acquerello */
+  -webkit-mask:
+      radial-gradient(circle at 15% 20%, black 0 55%, transparent 75%),
+      radial-gradient(circle at 85% 15%, black 0 60%, transparent 80%),
+      radial-gradient(circle at 20% 85%, black 0 60%, transparent 80%),
+      radial-gradient(circle at 80% 80%, black 0 55%, transparent 75%),
+      radial-gradient(circle at 50% 50%, black 0 65%, transparent 95%);
+
+  -webkit-mask-composite: source-over;
+
+  mask:
+      radial-gradient(circle at 15% 20%, black 0 55%, transparent 75%),
+      radial-gradient(circle at 85% 15%, black 0 60%, transparent 80%),
+      radial-gradient(circle at 20% 85%, black 0 60%, transparent 80%),
+      radial-gradient(circle at 80% 80%, black 0 55%, transparent 75%),
+      radial-gradient(circle at 50% 50%, black 0 65%, transparent 95%);
 }
 
-/* .top-image::after{
+.top-image::after{
   content:"";
   position:absolute;
   inset:0;
@@ -276,7 +352,52 @@ linear-gradient(
     );
 
   opacity: 0.35;
-} */
+}
+
+/* sposta contenuto sotto immagine */
+.corpo{
+  top:45%;
+}
+
+/* TITOLI */
+.titolo{
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+
+  font-family: 'Great Vibes', cursive;
+  font-size: 50px;
+  z-index: 90;
+  color: #6B5D54;
+}
+
+.sottotitolo{
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+
+  font-size: 17px;
+  z-index: 90;
+  color: #8C837A;
+}
+
+/* CORPO */
+.corpo{
+  position:absolute;
+  top:35%;
+  left:50%;
+  transform:translateX(-50%);
+  width:88%;
+   z-index: 90;
+  text-align:center;
+  color:#6B5D54;
+}
 
 /* SEZIONI */
 .sezione{
@@ -302,13 +423,20 @@ linear-gradient(
   z-index: 90;
 
   font-family: 'Cormorant Garamond', serif;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 1.4;
 
   color: #6f6158;
   letter-spacing: 0.3px;
   text-align: center;
+}
+
+.location-link i {
+  font-size: 0.95em;
+  opacity: 0.55;
+  color: #C4A574;
+  margin-bottom: 6px;
 }
 
 .indirizzo {
@@ -339,15 +467,13 @@ linear-gradient(
 
 /* BOTTONI */
 .action-buttons{
+   z-index: 90;
+  position:absolute;
+  bottom:6%;
+  left:50%;
+  transform:translateX(-50%);
   display:flex;
-  flex-direction:row;
-  justify-content:center;   /* 👈 QUESTO è quello che ti manca */
-  align-items:center;
-  gap:20px;
-
-  width:100%;
-  margin-top:30px;
-  margin-bottom:30px;
+  gap:14px;
 }
 
 .action-btn{
@@ -368,34 +494,37 @@ linear-gradient(
       transform-origin: right;
     }
 
-.primo{
-  width:100%;
+
+  .corpo{
+  position:absolute;
+  top:55%;
+  left:50%;
+  transform:translateX(-50%);
+  width:88%;
   text-align:center;
+
+  font-family:'Cormorant Garamond', serif;
+  color:#6f6158;
 }
+.scroll{
+  position: relative;
 
-/* TITOLI */
-.titolo{
-  width: 100%;
-  text-align: center;
-  margin-top: 30px;
-  font-family: 'Great Vibes', cursive;
-  font-size: 50px;
-  color: #6B5D54;
+  height: 100vh;        /* 👈 fondamentale */
+  overflow-y: auto;     /* scroll interno */
+  overflow-x: hidden;
+
+  padding: 20px 0 120px;
+  box-sizing: border-box;
+
+  -webkit-overflow-scrolling: touch;
 }
-
-.sottotitolo{
-  margin-top: 30px;
-  width: 100%;
-  text-align: center;
-
-  font-size: 17px;
-  color: #8C837A;
-}
-
 /* DATA */
 #data{
-  margin-top: 150px;
-  font-family: 'Great Vibes', cursive;
+  position:absolute;
+  top:35%;
+  left:50%;
+  transform:translateX(-50%);
+
   width:100%;
   text-align:center;
 
@@ -403,16 +532,6 @@ linear-gradient(
   font-weight:500;
   letter-spacing:1px;
   color:#5f524a;
-  text-transform:lowercase;
-}
-
-.secondo{
-  margin-top: 70%;
-  width:100%;
-  text-align:center;
-
-  font-family:'Cormorant Garamond', serif;
-  color:#6f6158;
 }
 
 /* SEZIONI */
@@ -437,14 +556,12 @@ linear-gradient(
 
   font-size:16px;
   line-height:1.4;
-  text-transform:uppercase;
-  letter-spacing: 2px;
 }
 
 /* ICONA */
 .evento i{
   color:#C4A574;
-  font-size:18px;
+  font-size:16px;
   margin-top:3px;
   opacity:0.8;
 }
@@ -466,9 +583,11 @@ linear-gradient(
   text-align: center;
 
   font-size: 18px;
+  letter-spacing: 2px;
   color: #5f524a;
 
   padding: 18px 0;
+  margin: 25px 0;
 }
 
 /* linea sopra */
@@ -513,26 +632,16 @@ linear-gradient(
   display:flex;
   flex-direction:column;
   align-items:center;
-  margin: 20px;
+
+  margin:30px 0;
+  padding:10px 0;
 }
 
 /* ICONA */
-
-.iconbig{
-  position: absolute;
-  top: 55%;
-  left: 0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  font-size:200px;
-  color:#C4A574;
-}
-
 .icon{
   font-size:20px;
   color:#C4A574;
+  margin-bottom:8px;
   opacity:0.85;
 }
 
@@ -551,6 +660,9 @@ linear-gradient(
   position:relative;
 
   font-size:14px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+
   color:#6b5d54;
 
   padding:12px 0;
@@ -589,7 +701,7 @@ linear-gradient(
   flex-direction:column;
   align-items:center;
   text-decoration:none;
-  font-size:18px;
+
   color:#6f6158;
 
   padding:10px 0;
@@ -618,7 +730,7 @@ linear-gradient(
 
 /* INDIRIZZO */
 .address{
-  font-size:16px;
+  font-size:13px;
   color:#8a7c72;
   margin-top:4px;
 }
@@ -627,6 +739,9 @@ linear-gradient(
 </head>
 
 <body>
+
+<div class="stage">
+
   <!-- BOOK -->
    <div class="book">
       <div class="page left" id="leftPage"></div>
@@ -641,19 +756,19 @@ linear-gradient(
 
   <!-- INVITO -->
  <div class="a4">
-  <div class="primo">
 <div class="top-image">
   <img src="sfondotati.jpg" alt="immagine invito">
 </div>
-
+<div class="scroll">
   <div class="titolo">Manuele & Tania</div>
   <div class="sottotitolo">annunciano il loro matrimonio</div>
-<div class="iconbig">
+  <div class="divider" id="data">10-10-2026 • ore 10:00</div>
+  <div class="corpo">
 
-</div>
-  <div class="divider" id="data">10-10-2026 - ore 10:00</div>
-  </div>
-  <div class="secondo">
+   
+ 
+
+
 
     <!-- CERIMONIA -->
     <div class="card">
@@ -661,8 +776,8 @@ linear-gradient(
         <i class="fa-solid fa-church"></i>
       </div>
 
-      <div class="divider">
-        <div class="evento">Cerimonia</div>
+      <div class="evento">
+        <div class="divider">Cerimonia</div>
          <a href="https://www.google.it/maps/place/Basilica+of+the+Crowned+Mother+of+Good+Counsel+and+Queen+of+the+Catholic+Church/@40.8649994,14.2469316,17z/data=!3m2!4b1!5s0x133b087b1480bb21:0x202069aca76c99fb!4m6!3m5!1s0x133b087b12fa8291:0x5b8ca8d302e38fe8!8m2!3d40.8649994!4d14.2469316!16s%2Fm%2F026wfm_"
   target="_blank"
   class="location-link">
@@ -687,8 +802,8 @@ linear-gradient(
         <i class="fa-solid fa-champagne-glasses"></i>
       </div>
 
-      <div class="divider">
-        <div class="evento">Ricevimento</div>
+      <div class="content">
+        <div class="divider">Ricevimento</div>
 
           <a href="https://www.google.it/maps/place/Villa+Soglia+-+Wedding+%26+Events/@40.78354,14.699382,17z/data=!3m1!4b1!4m6!3m5!1s0x133bc7ae07ddbacd:0xe0654de443bfd980!8m2!3d40.78354!4d14.699382!16s%2Fg%2F1tdqw_jh"
    target="_blank"
@@ -701,20 +816,21 @@ linear-gradient(
 </a>
       </div>
     </div>
-  <!-- BOTTONI -->
 
+  </div>
+
+  <!-- BOTTONI -->
   <div class="action-buttons">
     <a href="partecipazione.html" class="action-btn" style="--i:0;"><i class="fa-solid fa-check"></i></a>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdnfhsL2lWP8gc5E-1cBpClJa25uI-BtvNkWvB5h8EqveMOqw/viewform?usp=publish-editor" class="action-btn" style="--i:1;"><i class="fa-solid fa-pen"></i></a>
+    <a href="https://forms.gle/o3xgW6BfQE7T1m6g8" class="action-btn" style="--i:1;"><i class="fa-solid fa-pen"></i></a>
     <a href="regalo.html" class="action-btn" style="--i:2;"><i class="fa-solid fa-gift"></i></a>
   </div>
 
 
-
+</div>
 </div>
 </div>
   <script>
-    document.body.classList.add("locked");
     // blocca menu tasto destro
     document.addEventListener("contextmenu", e => e.preventDefault());
 
@@ -735,26 +851,26 @@ linear-gradient(
       });
     });
 
+    // animazione apertura libro
     const book = document.querySelector(".book");
     const btn = document.getElementById("openBtn");
     const leftPage = document.querySelector(".page.left");
     const rightPage = document.querySelector(".page.right");
 
-   btn.addEventListener("click", () => {
-   document.body.classList.remove("locked");
-    document.body.classList.add("unlocked");
-
+    btn.addEventListener("click", () => {
   rightPage.style.transform = "rotateY(120deg)";
-
   setTimeout(() => {
     leftPage.style.transform = "rotateY(-120deg)";
   }, 500);
 
   setTimeout(() => {
+    // salva lo stato
     localStorage.setItem("invitoAperto", "true");
-   // book.remove();
+
+    book.remove();
   }, 5000);
 });
+
   </script>
 
 </body>

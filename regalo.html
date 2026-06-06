@@ -1,87 +1,171 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <!-- Inserisci nel <head> -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <meta charset="UTF-8">
-<title>Invito di Matrimonio</title>
+<title>RSVP Matrimonio</title>
 
-<!-- Font eleganti -->
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
 
- <!-- Il tuo CSS -->
- <link rel="stylesheet" href="stile.css">
 <style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Playfair Display', serif;
+  background: transparent;
+}
 
-.rsvp-step1 input {
+/* CONTAINER PRINCIPALE */
+.stage {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* SFONDO */
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+ .action-buttons{
+  display:flex;
+  flex-direction:row;
+  justify-content:center;   /* 👈 QUESTO è quello che ti manca */
+  align-items:center;
+  gap:20px;
+
   width:100%;
-  border:none;
-  border-bottom:1px solid #786a6a;
-  background:transparent;
-  padding:8px 0;
-  font-size:1em;
-  margin-bottom:20px;
-  color:#786a6a;
+  margin-top:30px;
+}
+.action-btn{
+  width:52px;
+  height:52px;
+  border-radius:12px;
+  background:#F8F5F0;
+  border:1px solid #D6C3A5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#6B5D54;
+  box-shadow:0 6px 16px rgba(0,0,0,0.10);
 }
 
-.rsvp-step1 button {
-  padding:10px 25px;
-  margin:0 10px;
-  border:1px solid #786a6a;
-  background:transparent;
-  color:#786a6a;
-  cursor:pointer;
+/* OVERLAY CONTENUTO */
+    .rsvp-overlay{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      width:min(900px, 92vw);
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      z-index:2;
+    }
+
+/* BOX CONTENUTO */
+.rsvp-step1 {
+  max-width: 620px;
 }
 
-.rsvp-step1 button.enabled { opacity:1; }
+/* INPUT */
+.rsvp-step1 input{
+  width: 100%;
+  margin: 8px 0;
+  padding: 6px 8px;
+  border: none;
+  border-bottom: 1px solid #6B5D54;
+  background: transparent;
+  color: #6B5D54;
+  font-size: 2em;
+}
 
+.rsvp-step1 label{
+  width: 100%;
+  margin: 8px 0;
+  padding: 6px 8px;
+  border: none;
+  background: transparent;
+  color: #6B5D54;
+  font-size: 3em;
+}
+
+/* BOTTONI */
+.rsvp-step1 button,
+.rsvp-step2 button {
+  padding: 8px 20px;
+  margin: 5px;
+  border: 1px solid #6B5D54;
+  background: transparent;
+  color: #6B5D54;
+  cursor: pointer;
+}
+
+/* STEP 2 (se lo usi dopo) */
+.rsvp-step2 {
+  display: none;
+}
 </style>
-
 </head>
 
 <body>
 
-<div class="a4">
-  <div class="canvas">
-    <img src="sfondo.png" alt="">
+<div class="stage">
 
- <div class="corpo" id="corpo">
+  <!-- SFONDO -->
+  <img class="bg" src="sfondo1.jpg" alt="Sfondo invito">
+
+  <!-- CONTENUTO SOPRA -->
   <div class="rsvp-overlay">
-    <div class="rsvp-step1">
-      
-        <label>La vostra presenza sara il dono più prezionso per noi</label>
-        <div class="iban-container" style="margin-top:15px; text-align:center; display:block; width:100%;">
-          <input type="text" id="ibanField" value="IT00X0000000000000000000000" readonly 
-                 style="width:100%; padding:5px; text-align:center; display:block; margin:0 auto 8px auto;">
-          <button type="button" onclick="copyIBAN()" style="padding:5px 15px;">Copia IBAN</button>
-        </div>
-    </div>
-  </div>
-  
-  </div>
- 
-  <div class="action-buttons">
-    <a href="home.html" class="action-btn"><i class="fa-solid fa-house"></i></a>
- </div>
 
- <!-- Bottoni sotto il corpo del matrimonio -->
-</div>
+    <div class="rsvp-step1">
+
+      <label>
+        La vostra presenza sarà il dono più prezioso per noi
+      </label>
+
+      <div class="iban-container" style="margin-top:15px;">
+        <input type="text" id="ibanField"
+               value="IT00X0000000000000000000000"
+               readonly>
+
+        <button type="button" onclick="copyIBAN()">
+          Copia IBAN
+        </button>
+      </div>
+
+    </div>
+ <div class="action-buttons">
+          <a href="index.html" class="action-btn" aria-label="Torna indietro">
+            <i class="fa-solid fa-arrow-left"></i>
+          </a>
+        </div>
+  </div>
+   
+
 </div>
 
 <script>
-  document.addEventListener("contextmenu", e => e.preventDefault());
-  
-  function copyIBAN() {
+function copyIBAN() {
   const iban = document.getElementById("ibanField");
   iban.select();
-  iban.setSelectionRange(0, 99999); // per dispositivi mobili
+  iban.setSelectionRange(0, 99999);
+
   navigator.clipboard.writeText(iban.value)
     .then(() => alert("IBAN copiato negli appunti!"))
     .catch(() => alert("Impossibile copiare l'IBAN."));
 }
-  </script>
-  
-  
+</script>
+
 </body>
 </html>
