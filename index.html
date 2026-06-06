@@ -709,15 +709,11 @@ linear-gradient(
     <a href="regalo.html" class="action-btn" style="--i:2;"><i class="fa-solid fa-gift"></i></a>
   </div>
 
-
-
 </div>
 </div>
   <script>
-    document.body.classList.add("locked");
     // blocca menu tasto destro
     document.addEventListener("contextmenu", e => e.preventDefault());
-
     // testo temporaneo su click
     document.addEventListener("DOMContentLoaded", function() {
       const area = document.getElementById("click-area");
@@ -740,6 +736,20 @@ linear-gradient(
     const leftPage = document.querySelector(".page.left");
     const rightPage = document.querySelector(".page.right");
 
+    const opened = localStorage.getItem("invitoAperto") === "true";
+    const time = localStorage.getItem("invitoApertoTime");
+
+    const TEN_MIN = 10 * 60 * 1000;
+
+    if (opened && time) {
+    // salta effetto libro
+    book.style.display = "none";
+    document.body.classList.remove("locked");
+    document.body.classList.add("unlocked");
+
+    a4.style.opacity = "1";
+    a4.style.pointerEvents = "auto";
+    }
    btn.addEventListener("click", () => {
    document.body.classList.remove("locked");
     document.body.classList.add("unlocked");
@@ -752,7 +762,8 @@ linear-gradient(
 
   setTimeout(() => {
     localStorage.setItem("invitoAperto", "true");
-   // book.remove();
+    localStorage.setItem("invitoApertoTime", Date.now());
+    book.style.display = "none"; 
   }, 5000);
 });
   </script>
