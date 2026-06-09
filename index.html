@@ -149,6 +149,7 @@ body::before {
   margin: 0 auto;
   z-index: 1;
   opacity: 0;
+   display: none;
 }
 
 .top-image{
@@ -296,14 +297,14 @@ body::before {
 .titolo{
   width: 100%;
   text-align: center;
-  margin-top: 30px;
+  margin-top: 10px;
   font-family: 'Great Vibes', cursive;
   font-size: 50px;
   color: #6B5D54;
 }
 
 .sottotitolo{
-  margin-top: 40px;
+  margin-top: 25px;
   margin-bottom: 25px;
   width: 100%;
   text-align: center;
@@ -506,11 +507,17 @@ body::before {
 .divider::after{
   bottom:0;
 } 
-
 .anelli-icon {
   z-index: 3;
   width: 250px;
-  height: 300px;      /* piccolo bordo, non gigante */
+  height: 250px;      /* piccolo bordo, non gigante */
+}
+
+.anelli-icon img {
+  background-color: #5555;
+  z-index: 3;
+  width: 150px;
+  height: 100px;      /* piccolo bordo, non gigante */
 }
 
 .chiesa-icon {
@@ -784,14 +791,10 @@ body::before {
 
     const TEN_MIN = 10 * 60 * 1000;
 
-    if (opened && time) {
-    // salta effetto libro
-   // book.style.display = "none";
-    document.body.classList.remove("locked");
-    document.body.classList.add("unlocked");
+    if (opened ) {
 
-    a4.style.opacity = "1";
-    a4.style.pointerEvents = "auto";
+      a4.style.opacity = "1";
+      a4.style.pointerEvents = "auto";
     }
 
 
@@ -809,6 +812,10 @@ body::before {
     document.body.classList.add("unlocked");
     localStorage.setItem("invitoAperto", "true");
     localStorage.setItem("invitoApertoTime", Date.now());
+  rightPage.style.transform = "rotateY(120deg)";
+
+   a4.style.display = "block";
+
   rightPage.style.transform = "rotateY(120deg)";
 
   setTimeout(() => {
