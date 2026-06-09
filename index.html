@@ -445,12 +445,11 @@ padding: 10px;
 /* DIVIDER (Cerimonia / Ricevimento) */
 .divider{
   position:relative;
-
   font-size:14px;
   color:#6b5d54;
-
   padding:12px 0;
   margin-bottom:10px;
+  align-items: center;
 }
 
 /* linee eleganti sopra e sotto */
@@ -556,29 +555,23 @@ padding: 10px;
 }
 
 
+.divider {
+    display: flex;
+    justify-content: center;
+}
+
 .invitation-card {
-           
-           max-width: 500px;
-           width: 100%;
-           padding: 60px 40px;
-           text-align: center;
-           position: relative;
-       }
-       /* Cornice decorativa sottile (opzionale, molto fine) */
-       .invitation-card::before {
-           content: '';
-           position: absolute;
-           top: 15px;
-           bottom: 15px;
-           left: 15px;
-           right: 15px;
-           border: 1px solid #f0e9dc;
-           pointer-events: none;
-       }
+    width: 100%;
+    max-width: 600px;
+    padding: 60px 40px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
        /* Sezione Titolo Cerimonia */
        .section-title {
            font-family: 'Cinzel', serif;
-           font-size: 1.6rem;
+           font-size: 18px;
            font-weight: 400;
            letter-spacing: 0.3em;
            text-transform: uppercase;
@@ -588,7 +581,7 @@ padding: 10px;
        /* Contenitore per l'illustrazione della Basilica */
        .image-container {
            width: 100%;
-           max-width: 380px;
+           max-width: 150px;
            margin: 0 auto 35px auto;
            overflow: hidden;
        }
@@ -600,18 +593,18 @@ padding: 10px;
        }
        /* Informazioni sulla Location e Via */
        .location-details {
-           margin-bottom: 45px;
+           margin-bottom: 20px;
            padding: 0 10px;
        }
        .venue-name {
-           font-size: 1.4rem;
+           font-size: 16px;
            font-weight: 500;
            letter-spacing: 0.05em;
            margin-bottom: 8px;
            color: #332f2a;
        }
        .address {
-           font-size: 1.1rem;
+           font-size: 14px;
            font-style: italic;
            font-weight: 300;
            color: #70675c;
