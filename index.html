@@ -96,6 +96,36 @@ body::before {
   background-position: right center;
 }
 
+.right::before,
+.right::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 18px;
+    height: 100%;
+
+    background: linear-gradient(
+        180deg,
+        #e9d8b8 0%,
+        #c4a574 50%,
+        #e9d8b8 100%
+    );
+
+    box-shadow:
+        inset 2px 0 4px rgba(255,255,255,0.3),
+        inset -2px 0 4px rgba(0,0,0,0.2);
+
+    z-index: 15;
+}
+
+.right::before {
+    left: 0px;
+}
+
+.right::after {
+    left: 0px;
+}
+
 
 
   #openBtn {
@@ -284,7 +314,7 @@ body::before {
 
 /* DATA */
 #data{
-  margin-top: 100px;
+  margin-top: 0px;
   font-family: 'Great Vibes', cursive;
   width:100%;
   text-align:center;
@@ -297,7 +327,6 @@ body::before {
 
 .secondo {
   margin-top: 50%;
-padding: 10px;
   display: flex;
   flex-direction: column; /* uno sotto l'altro */
   align-items: center;    /* centra orizzontalmente */
@@ -479,11 +508,9 @@ padding: 10px;
 } 
 
 .anelli-icon {
-
   z-index: 3;
-
-  width: 150px;
-  height: 100px;      /* piccolo bordo, non gigante */
+  width: 250px;
+  height: 300px;      /* piccolo bordo, non gigante */
 }
 
 .chiesa-icon {
@@ -563,7 +590,6 @@ padding: 10px;
 .invitation-card {
     width: 100%;
     max-width: 600px;
-    padding: 60px 40px;
     text-align: center;
     box-sizing: border-box;
 }
@@ -581,8 +607,7 @@ padding: 10px;
        /* Contenitore per l'illustrazione della Basilica */
        .image-container {
            width: 100%;
-           max-width: 150px;
-           margin: 0 auto 35px auto;
+           max-width: 100px;
            overflow: hidden;
        }
        .image-container img {
@@ -653,7 +678,7 @@ padding: 10px;
 
  <img src="anelli.png"  class="anelli-icon" alt="anelli">
 
-  <div class="divider" id="data">10-10-2026 <br>alle ore 10:00</div>
+  <div class="divider" id="data">10-10-2026 - ore 10:00</div>
   </div>
   <div class="secondo">
 
@@ -699,7 +724,15 @@ padding: 10px;
 </div>
 </div>
   <!-- BOTTONI -->
-
+     <div class="divider">
+   <div class="invitation-card"></div>
+   <a href="https://docs.google.com/forms/d/e/1FAIpQLSdnfhsL2lWP8gc5E-1cBpClJa25uI-BtvNkWvB5h8EqveMOqw/viewform?usp=publish-editor"
+       class="action-btn top-btn">
+  <h1 class="section-title">Confermate la vostra prenotazione</h1>
+  <div class="image-container">
+<img src="parteciperai.png" alt="Parteciperai">
+</div>
+</div>
 <div class="action-buttons">
 
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSdnfhsL2lWP8gc5E-1cBpClJa25uI-BtvNkWvB5h8EqveMOqw/viewform?usp=publish-editor"
@@ -752,6 +785,17 @@ padding: 10px;
     const TEN_MIN = 10 * 60 * 1000;
 
     if (opened && time) {
+    // salta effetto libro
+   // book.style.display = "none";
+    document.body.classList.remove("locked");
+    document.body.classList.add("unlocked");
+
+    a4.style.opacity = "1";
+    a4.style.pointerEvents = "auto";
+    }
+
+
+    if (opened ) {
     // salta effetto libro
    // book.style.display = "none";
     document.body.classList.remove("locked");
