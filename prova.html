@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Partecipazione di Matrimonio</title>
+   <style>
+       :root {
+           /* Colori ispirati al soffitto della Basilica */
+           --oro-scuro: #8a6d3b;
+           --oro-chiaro: #e5c158;
+           --oro-medio: #c5a059;
+           --sfondo-soffitto: #faf6ee;
+           --crema-scuro: #d1c2a5;
+       }
+
+       body {
+           background-color: #f4f0e6;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           height: 100vh;
+           margin: 0;
+           font-family: 'Georgia', serif;
+       }
+
+       /* Contenitore principale della partecipazione */
+       .invito-container {
+           position: relative;
+           width: 450px;
+           height: 600px;
+           background-color: var(--sfondo-soffitto);
+           box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+           padding: 30px;
+           box-sizing: border-box;
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+       }
+
+       /* La Cornice che riproduce il motivo del soffitto */
+       .cornice-soffitto {
+           position: absolute;
+           top: 15px;
+           left: 15px;
+           right: 15px;
+           bottom: 15px;
+           border: 4px solid var(--oro-scuro);
+           pointer-events: none;
+       }
+
+       /* File di rosette sui quattro lati */
+       .lato-cornice {
+           position: absolute;
+           display: flex;
+           justify-content: space-around;
+           align-items: center;
+           background-color: var(--crema-scuro);
+       }
+
+       .lato-cornice.orizzontale {
+           left: 0;
+           right: 0;
+           height: 24px;
+       }
+
+       .lato-cornice.verticale {
+           top: 24px;
+           bottom: 24px;
+           width: 24px;
+           flex-direction: column;
+       }
+
+       .top    { top: 0; }
+       .bottom { bottom: 0; }
+       .left   { left: 0; }
+       .right  { right: 0; }
+
+       /* Riproduzione CSS della singola rosetta geometrica del soffitto */
+       .rosetta {
+           width: 18px;
+           height: 18px;
+           border-radius: 50%;
+           background: radial-gradient(circle, var(--oro-chiaro) 20%, var(--oro-scuro) 21%, var(--oro-medio) 40%, var(--oro-scuro) 70%);
+           border: 1px solid var(--oro-scuro);
+           box-shadow: inset 0 0 4px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.2);
+           position: relative;
+       }
+
+       /* Dettaglio interno della rosetta (effetto rilievo) */
+       .rosetta::after {
+           content: '';
+           position: absolute;
+           top: 25%; left: 25%; width: 50%; height: 50%;
+           border-radius: 50%;
+           border: 1px dashed var(--sfondo-soffitto);
+           opacity: 0.7;
+       }
+
+       /* Contenuto dell'invito */
+       .contenuto {
+           text-align: center;
+           color: #333;
+           z-index: 1;
+           padding: 20px;
+       }
+
+       h1 {
+           font-size: 28px;
+           color: var(--oro-scuro);
+           margin-bottom: 5px;
+           font-weight: normal;
+       }
+       
+       p {
+           font-size: 16px;
+           line-height: 1.6;
+           font-style: italic;
+       }
+
+       .data {
+           font-size: 18px;
+           font-weight: bold;
+           margin-top: 20px;
+           color: var(--oro-scuro);
+       }
+   </style>
+</head>
+<body>
+
+   <div class="invito-container">
+       <div class="cornice-soffitto">
+           <div class="lato-cornice orizzontale top">
+               <div class="rosetta"></div><div class="rosetta"></div><div class="rosetta"></div>
+               <div class="rosetta"></div><div class="rosetta"></div><div class="rosetta"></div>
+               <div class="rosetta"></div><div class="rosetta"></div><div class="rosetta"></div>
+           </div>
+           <div class="lato-cornice verticale right">
+               <div class="rosetta"></div><div class="rosetta"></div><div class="rosetta"></div>
+               <div class="rosetta"></div><div class="rosetta"></div><div class="rosetta"></div>
+               <div class="rosetta"></div><div class="rosetta"></div><div class="rosetta"></div>
+           </div>
+           <div class="lato-cornice orizzontale bottom">
+               <div class="rosetta"></div><div class="rosetta"></div><div class="rosetta"></div>
+               <div class="rosetta"></div><div class="rosetta"></div><div class="rosetta"></div>
+               <div class="rosetta"></div><div class="rosetta"></div><div class="rosetta"></div>
+           </div>
+           <div class="lato-cornice verticale left">
+               <div class="rosetta"></div><div class="rosetta"></div><div class="rosetta"></div>
+               <div class="rosetta"></div><div class="rosetta"></div><div class="rosetta"></div>
+               <div class="rosetta"></div><div class="rosetta"></div><div class="rosetta"></div>
+           </div>
+       </div>
+
+       <div class="contenuto">
+           <h1>Nome & Nome</h1>
+           <p>Annunciano il loro matrimonio</p>
+           <p>nella Basilica dell'Incoronata Madre del Buon Consiglio<br>Via Capodimonte, Napoli</p>
+           <div class="data">SABATO, 12 SETTEMBRE 2026</div>
+       </div>
+   </div>
+
+</body>
+</html>
