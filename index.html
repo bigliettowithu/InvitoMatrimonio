@@ -24,6 +24,8 @@ body.unlocked .a4 {
 }
 
 html, body {
+  background-image: url("ripeti.jpg");
+  background-repeat: repeat;
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -31,7 +33,18 @@ html, body {
 
   font-family: 'Playfair Display', serif;
   background-attachment: scroll;
-  background-size: 100% 100%;
+  background-size: 100% 50%;
+  
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("ripeti.png");
+  background-repeat: repeat;
+  background-size: auto;
+  opacity: 0.2;
+  z-index: -1;
 }
 
 body::before {
@@ -42,12 +55,12 @@ body::before {
   width: 100vw;
   height: 100vh;
 
-  background: linear-gradient(
+  /* background: linear-gradient(
     180deg,
     #fcfaf6 0%,
     #f5efe6 50%,
     #ead9bd 100%
-  );
+  ); */
 
   z-index: -1;
 }
@@ -653,6 +666,76 @@ body::before {
            height: auto;
        }
 
+
+       .info-section{
+    width: min(900px, 90%);
+    margin: 80px auto;
+}
+
+.info-title{
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    color: #6f6158;
+    margin-bottom: 40px;
+}
+
+.info-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.info-image img{
+    width: 90px;
+    height: auto;
+    display: block;
+}
+
+.info-image-menu img{
+  margin-right: -30px;
+    width: 120px;
+    height: auto;
+    display: block;
+}
+
+.info-text{
+    flex: 1;
+    padding-left: 40px;
+    border-left: 1px solid #C4A574;
+}
+
+.info-description{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #7b6b61;
+    margin-bottom: 30px;
+}
+
+.info-button{
+    display: inline-block;
+    padding: 10px;
+
+    border: 1px solid #C4A574;
+    border-radius: 30px;
+
+    text-decoration: none;
+
+    color: #8d7458;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+
+    transition: all .3s ease;
+}
+
+.info-button:hover{
+    background: #C4A574;
+    color: white;
+}
+
 </style>
 </head>
 
@@ -731,31 +814,75 @@ body::before {
 </div>
 </div>
   <!-- BOTTONI -->
-     <div class="divider">
-   <div class="invitation-card"></div>
-   <a href="https://docs.google.com/forms/d/e/1FAIpQLSdnfhsL2lWP8gc5E-1cBpClJa25uI-BtvNkWvB5h8EqveMOqw/viewform?usp=publish-editor"
-       class="action-btn top-btn">
-  <h1 class="section-title">Confermate la vostra prenotazione</h1>
-  <div class="image-container">
-<img src="parteciperai.png" alt="Parteciperai">
+<div class="info-section">
+
+    <h2 class="section-title">Conferma la tua presenza</h2>
+
+    <div class="info-content">
+        <div class="info-image">
+            <img src="parte.png" alt="Parteciperai">
+        </div>
+
+        <div class="info-text">
+            <p class="info-description">
+                Vi chiediamo gentilmente di confermare la vostra presenza
+                accedendo alla pagina dedicata.
+            </p>
+
+           <a href="partecipazione.html"
+               class="info-button">
+                Conferma la partecipazione
+            </a>
+        </div>
+    </div>
 </div>
+
+<div class="info-section">
+
+    <h2 class="section-title">Preferenze alimentari</h2>
+
+    <div class="info-content">
+
+        <div class="info-image-menu">
+            <img src="menu.png" alt="Preferenze alimentari">
+        </div>
+
+        <div class="info-text">
+
+            <p class="info-description">
+                Vi chiediamo gentilmente di segnalare le vostre preferenze alimentari.
+            </p>
+
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdnfhsL2lWP8gc5E-1cBpClJa25uI-BtvNkWvB5h8EqveMOqw/viewform?usp=publish-editor"
+               class="info-button">
+                Comunica le tue preferenze
+            </a>
+
+        </div>
+
+    </div>
 </div>
-<div class="action-buttons">
 
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdnfhsL2lWP8gc5E-1cBpClJa25uI-BtvNkWvB5h8EqveMOqw/viewform?usp=publish-editor"
-       class="action-btn top-btn">
-        <img src="parteciperai.png" alt="Parteciperai">
-    </a>
 
-    <div class="bottom-buttons">
-        <a href="partecipazione.html" class="action-btn">
-            <img src="menu.png" alt="Informazioni">
-        </a>
+<div class="info-section">
+    <h2 class="section-title">Un pensiero per gli sposi</h2>
 
-        <a href="regalo.html" class="action-btn stacked-images">
-    <img src="menu.png" alt="Informazioni" class="img-back">
-    <img src="regalo.png" alt="Lista regalo" class="img-front">
-</a>
+    <div class="info-content">
+        <div class="info-image">
+            <img src="regalo.png" alt="Un pensiero">
+        </div>
+
+        <div class="info-text">
+            <p class="info-description">
+                La vostra presenza sarà il dono più prezioso.
+                Per chi lo desiderasse, abbiamo dedicato una pagina con ulteriori informazioni.
+            </p>
+
+            <a href="regalo.html"
+               class="info-button">
+                Scopri di più
+            </a>
+        </div>
     </div>
 </div>
 
