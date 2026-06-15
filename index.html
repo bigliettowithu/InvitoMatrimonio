@@ -23,9 +23,20 @@ body.unlocked .a4 {
   pointer-events: auto;
 }
 
-html, body {
-  background-image: url("ripeti.jpg");
-  background-repeat: repeat;
+html {
+  
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+background-color: whitesmoke;
+  font-family: 'Playfair Display', serif;
+  background-attachment: scroll;
+  background-size: 100% 50%;
+      padding: 10px;
+}
+
+body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -34,7 +45,13 @@ html, body {
   font-family: 'Playfair Display', serif;
   background-attachment: scroll;
   background-size: 100% 50%;
-  
+background-image: url("ripeti.jpg");
+  background-repeat: repeat;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
 }
 body::before {
   content: "";
@@ -45,6 +62,12 @@ body::before {
   background-size: auto;
   opacity: 0.2;
   z-index: -1;
+}
+
+.primo{
+    min-height: calc(100vh - 10px);
+    display: flex;
+    flex-direction: column;
 }
 
 body::before {
@@ -308,27 +331,51 @@ body::before {
 
 /* TITOLI */
 .titolo{
-  width: 100%;
-  text-align: center;
-  margin-top: 10px;
-  font-family: 'Great Vibes', cursive;
-  font-size: 50px;
-  color: #6B5D54;
+    position: absolute;
+
+     top: calc(
+        env(safe-area-inset-top) +
+        (100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom)) / 2
+        + 50px
+    );
+
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 100%;
+    text-align: center;
+
+    font-family: 'Great Vibes', cursive;
+    font-size: 50px;
+    color: #6B5D54;
 }
 
 .sottotitolo{
-  margin-top: 17px;
-  margin-bottom: 25px;
+   position: absolute;
+  font-family: 'Great Vibes', cursive;
+     top: calc(
+        env(safe-area-inset-top) +
+        (100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom)) / 2
+        + 130px
+    );
   width: 100%;
   text-align: center;
 
-  font-size: 17px;
+  font-size: 23px;
   color: #8C837A;
+}
+
+.primo{
+    min-height: 100vh;
+    min-height: 100dvh;
+    border-color:5px solid whitesmoke;
+
 }
 
 /* DATA */
 #data{
-  margin-top: 0px;
+  margin-top: auto;
+  margin-bottom: calc(20px + env(safe-area-inset-bottom));
   font-family: 'Great Vibes', cursive;
   width:100%;
   text-align:center;
@@ -340,17 +387,15 @@ body::before {
 }
 
 .secondo {
-  margin-top: 50%;
+  margin-top: 50px;
   display: flex;
   flex-direction: column; /* uno sotto l'altro */
   align-items: center;    /* centra orizzontalmente */
   justify-content: center;
-
+  padding: 0;
   width: 100%;
-
   font-family: 'Cormorant Garamond', serif;
   color: #6f6158;
-
   text-align: center;
 }
 
@@ -490,9 +535,9 @@ body::before {
   position:relative;
   font-size:14px;
   color:#6b5d54;
-  padding:12px 0;
   margin-bottom:10px;
   align-items: center;
+  width: 100%;
 }
 
 /* linee eleganti sopra e sotto */
@@ -520,11 +565,23 @@ body::before {
 .divider::after{
   bottom:0;
 } 
-.anelli-icon {
-  z-index: 3;
-  margin-top: -20px;
-  width: 150px;
-  height: 100px;      /* piccolo bordo, non gigante */
+.anelli-icon{
+    position: absolute;
+
+    top: calc(
+        env(safe-area-inset-top) +
+        (100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom)) / 2
+        + 190px
+    );
+
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    z-index: 3;
+
+    width: 150px;
+    height: 100px;
+
 }
 
 .anelli-icon img {
@@ -534,22 +591,18 @@ body::before {
   height: 100px;      /* piccolo bordo, non gigante */
 }
 
-.chiesa-icon {
-
-  z-index: 3;
-
-  width: 400px;
-  height: 70px;      /* piccolo bordo, non gigante */
+.stemmaChiesa-icon{
+    z-index: 3;
+  margin-bottom: 10px;
+  width: 300px;
+  height: 80px; 
 }
 
-.villa-icon {
+.stemmi-icon {
   z-index: 3;
-  width: 230px;
-  height: 120px;      /* piccolo bordo, non gigante */
-  filter: brightness(0) saturate(100%);
-  margin-left: -10px;
-  margin-bottom: -50px;
-   margin-top: -10px;
+  width: 80px;
+  height: 80px;      /* piccolo bordo, non gigante */
+  margin-top: 10px;
 }
 
 /* LINK LOCATION */
@@ -560,8 +613,6 @@ body::before {
   text-decoration:none;
   font-size:18px;
   color:#6f6158;
-
-  padding:10px 0;
   transition:0.25s ease;
 }
 
@@ -606,40 +657,46 @@ body::before {
 .divider {
     display: flex;
     justify-content: center;
+    padding: 10px;
 }
 
 .invitation-card {
     width: 100%;
     max-width: 600px;
-    text-align: center;
     box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
        /* Sezione Titolo Cerimonia */
        .section-title {
+        
            font-family: 'Cinzel', serif;
            font-size: 18px;
            font-weight: 400;
            letter-spacing: 0.3em;
            text-transform: uppercase;
            color: #b8975a; /* Tonalità oro spento/elegante */
-           margin-bottom: 40px;
        }
        /* Contenitore per l'illustrazione della Basilica */
        .image-container {
-           width: 100%;
-           max-width: 100px;
+        margin-top: 10px;
+           width: 100px;
+           height: 100px;
            overflow: hidden;
        }
        .image-container img {
-           width: 100%;
-           height: auto;
-           display: block;
-           /* Se usi la versione a linee (foto 3), puoi de-saturarla leggermente se serve */
-       }
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
        /* Informazioni sulla Location e Via */
        .location-details {
-           margin-bottom: 20px;
            padding: 0 10px;
        }
        .venue-name {
@@ -656,21 +713,17 @@ body::before {
            color: #70675c;
            letter-spacing: 0.02em;
        }
-       /* Contenitore per lo Stemma/Araldica in fondo */
-       .crest-container {
-           width: 70px;
-           margin: 0 auto;
-           opacity: 0.85;
-       }
-       .crest-container img {
-           width: 100%;
-           height: auto;
-       }
-
 
        .info-section{
     width: min(900px, 90%);
-    margin: 80px auto;
+    margin: 10px;
+    padding: 10px;
+   box-shadow:
+  0 6px 18px rgba(0,0,0,0.10),
+  inset 0 1px 0 rgba(255,255,255,0.5),
+  inset 0 -1px 0 rgba(0,0,0,0.05);
+
+
 }
 
 .info-title{
@@ -685,8 +738,19 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
     gap: 40px;
 }
+    .section-title2 {
+        margin: 0;
+        padding: 0;
+           font-family: 'Cinzel', serif;
+           font-size: 18px;
+           font-weight: 400;
+           letter-spacing: 0.3em;
+           text-transform: uppercase;
+           color: #b8975a; /* Tonalità oro spento/elegante */
+       }
 
 .info-image img{
     width: 70px;
@@ -738,6 +802,10 @@ body::before {
     color: white;
 }
 
+.fa-location-dot {
+    font-size: 26px;
+    color: #70675c;
+}
 </style>
 </head>
 
@@ -775,50 +843,51 @@ body::before {
   <div class="secondo">
 
     <!-- CERIMONIA -->
-     <div class="divider">
-   <div class="invitation-card">
+     <div class="divider" >
+   <div class="invitation-card" >
     <a href="https://www.google.it/maps/place/Basilica+of+the+Crowned+Mother+of+Good+Counsel+and+Queen+of+the+Catholic+Church/@40.8649994,14.2469316,17z/data=!3m2!4b1!5s0x133b087b1480bb21:0x202069aca76c99fb!4m6!3m5!1s0x133b087b12fa8291:0x5b8ca8d302e38fe8!8m2!3d40.8649994!4d14.2469316!16s%2Fm%2F026wfm_"
   target="_blank"
   class="location-link">
-<h1 class="section-title">Cerimonia</h1>
+<h1 class="section-title" >Cerimonia</h1>
 <div class="image-container">
-<img src="chiesabordi.png" alt="Illustrazione Basilica del Buon Consiglio">
+<img src="chiesa2.png" alt="Illustrazione Basilica del Buon Consiglio">
 </div>
-<div class="location-details">
+<div class="location-details" >
+   <i class="fa-solid fa-location-dot"></i>
 <h2 class="venue-name">Basilica dell’Incoronata Madre del Buon Consiglio</h2>
 <p class="address">Via Capodimonte 13, Napoli</p>
 </div>
-<img  class="chiesa-icon" src="chiesa.png" alt="Stemma Araldico">
+<img  class="stemmaChiesa-icon" src="stemmachiesa.png" alt="Stemma Araldico">
 </a>
 </div>
 </div>
 
-    
+ <!-- Ricevimento -->
+     <div class="divider" >
+   <div class="invitation-card" >
 
-    <!-- RICEVIMENTO -->
-       <div class="divider">
-   <div class="invitation-card">
-    <a href="https://www.google.it/maps/place/Villa+Soglia+-+Wedding+%26+Events/@40.78354,14.699382,17z/data=!3m1!4b1!4m6!3m5!1s0x133bc7ae07ddbacd:0xe0654de443bfd980!8m2!3d40.78354!4d14.699382!16s%2Fg%2F1tdqw_jh"
-   target="_blank"
-   class="location-link">
 <h1 class="section-title">Ricevimento</h1>
-<div class="image-container">
-<img src="villabordi.png" alt="Illustrazione Basilica del Buon Consiglio">
-</div>
+
+<img src="villa2.png" alt="Illustrazione Basilica del Buon Consiglio" style="width:200px; height:120px; object-fit:cover;">
 <div class="location-details">
-<h2 class="venue-name">Basilica dell’Incoronata Madre del Buon Consiglio</h2>
-<p class="address">Via Capodimonte 13, Napoli</p>
+
+<h2 class="venue-name">Villa Soglia </h2>
+<p class="address">Corso Claudio,1 Castel San Giorgio SA</p>
+  <a href="https://www.google.it/maps/place/Villa+Soglia+-+Wedding+%26+Events/@40.78354,14.699382,17z/data=!3m1!4b1!4m6!3m5!1s0x133bc7ae07ddbacd:0xe0654de443bfd980!8m2!3d40.78354!4d14.699382!16s%2Fg%2F1tdqw_jh"
+   target="_blank"
+               class="info-button">
+                 Vedi sulla mappa
+            </a>
+</div>
+<img  class="stemmi-icon" src="stemmavilla.png" alt="Stemma Araldico" >
+
+</div>
 </div>
 
-<img class="villa-icon" src="villa.png" alt="Stemma Araldico">
-
-</a>
-</div>
-</div>
   <!-- BOTTONI -->
 <div class="info-section">
 
-    <h2 class="section-title">Conferma la tua presenza</h2>
+    <h2 class="section-title2">Conferma la tua presenza</h2>
 
     <div class="info-content">
         <div class="info-image">
@@ -841,7 +910,7 @@ body::before {
 
 <div class="info-section">
 
-    <h2 class="section-title">Preferenze alimentari</h2>
+    <h2 class="section-title2">Preferenze alimentari</h2>
 
     <div class="info-content">
 
@@ -867,7 +936,7 @@ body::before {
 
 
 <div class="info-section">
-    <h2 class="section-title">Un pensiero per gli sposi</h2>
+    <h2 class="section-title2">Lista di nozze</h2>
 
     <div class="info-content">
         <div class="info-image">
@@ -882,7 +951,7 @@ body::before {
 
             <a href="regalo.html"
                class="info-button">
-                Scopri di più
+                Clicca qui per ulteriori informazioni
             </a>
         </div>
     </div>
