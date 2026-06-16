@@ -38,31 +38,52 @@ background-color: whitesmoke;
 
 body {
   margin: 0;
-  padding: 0;
   min-height: 100vh;
-  overflow-x: hidden;
-
   font-family: 'Playfair Display', serif;
-  background-attachment: scroll;
-  background-size: 100% 50%;
-background-image: url("ripeti.jpg");
-  background-repeat: repeat;
-    min-height: 100vh;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
 
+ 
 }
+
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: url("ripeti.png");
+  pointer-events: none;
+
+  background-image: url("ripeti1.jpg");
+  background-repeat: repeat;
+  background-attachment: scroll;
+
+  /* fondamentale: NON deformare il pattern */
+  background-size: auto;
+  opacity: 0.4; /* opacity SOLO del pattern */
+}
+/* body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background-image: url("ripeti3.png");
+  background-repeat: repeat;
+  background-size: auto;
+
+  background-color: rgba(255, 255, 255, 0.6);
+  background-blend-mode: lighten;
+
+  pointer-events: none;
+  z-index: 0;
+} */
+
+/* body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("ripeti1.png");
   background-repeat: repeat;
   background-size: auto;
   opacity: 0.2;
   z-index: -1;
-}
+} */
 
 .primo{
     min-height: calc(100vh - 10px);
@@ -89,14 +110,12 @@ body::before {
 }
 
 .book {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  perspective: 2200px;
-  z-index: 10;
+  height: 100dvh;
   overflow: hidden;
-
+  z-index: 2000;
 }
-
 
 /* SINISTRA */
 .left,
@@ -104,7 +123,7 @@ body::before {
     position:absolute;
     top:0;
     width:50%;
-    height:100%;
+    height:100dvh;
     transition: transform 2.2s cubic-bezier(.77,0,.18,1);
     transform-style: preserve-3d;
     backface-visibility:hidden;
@@ -114,31 +133,33 @@ body::before {
   left: 0;
   transform-origin: left center;
 
-  background-image: url("sfondo.jpg");
+  background-image: url("init.png");
   background-repeat: no-repeat;
 
   background-size: 200% 100%;
   background-position: left center;
+  filter: brightness(1.1);
 }
 
 .right{
     right:0;
     transform-origin:right center;
 
-  background-image: url("sfondo.jpg");
+  background-image: url("init.png");
   background-repeat: no-repeat;
 
   background-size: 200% 100%;
   background-position: right center;
+  filter: brightness(1.1);
 }
 
-.right::before,
+/* .right::before,
 .right::after {
     content: "";
     position: absolute;
     top: 0;
     width: 18px;
-    height: 100%;
+     height:100dvh;;
 
     background: linear-gradient(
         180deg,
@@ -152,7 +173,7 @@ body::before {
         inset -2px 0 4px rgba(0,0,0,0.2);
 
     z-index: 15;
-}
+} */
 
 .right::before {
     left: 0px;
@@ -185,7 +206,7 @@ body::before {
   margin: 0 auto;
   z-index: 1;
   opacity: 0;
-   display: none;
+  display: none;
 }
 
 .top-image{
@@ -593,16 +614,18 @@ body::before {
 
 .stemmaChiesa-icon{
     z-index: 3;
-  margin-bottom: 10px;
-  width: 300px;
+   margin-top: 10px;
+  width: 80px;
   height: 80px; 
+    margin-bottom: 5px;
 }
 
 .stemmi-icon {
   z-index: 3;
   width: 80px;
-  height: 80px;      /* piccolo bordo, non gigante */
+  height: 75px;      /* piccolo bordo, non gigante */
   margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 /* LINK LOCATION */
@@ -664,16 +687,20 @@ body::before {
     width: 100%;
     max-width: 600px;
     box-sizing: border-box;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    padding: 0px;
+    margin: 0px;
+
 }
 
        /* Sezione Titolo Cerimonia */
        .section-title {
-        
+        padding: 0px;
+        margin: 0;
+
            font-family: 'Cinzel', serif;
            font-size: 18px;
            font-weight: 400;
@@ -818,9 +845,6 @@ body::before {
       </div>
       <div class="right" id="rightPage">
         
-        <div class="ribbon">
-  <div class="knot"></div>
-</div>
         <img id="openBtn" src="cera.png" alt="Apri l'invito">
       </div>
 
@@ -845,20 +869,19 @@ body::before {
     <!-- CERIMONIA -->
      <div class="divider" >
    <div class="invitation-card" >
-    <a href="https://www.google.it/maps/place/Basilica+of+the+Crowned+Mother+of+Good+Counsel+and+Queen+of+the+Catholic+Church/@40.8649994,14.2469316,17z/data=!3m2!4b1!5s0x133b087b1480bb21:0x202069aca76c99fb!4m6!3m5!1s0x133b087b12fa8291:0x5b8ca8d302e38fe8!8m2!3d40.8649994!4d14.2469316!16s%2Fm%2F026wfm_"
-  target="_blank"
-  class="location-link">
+   
 <h1 class="section-title" >Cerimonia</h1>
-<div class="image-container">
-<img src="chiesa2.png" alt="Illustrazione Basilica del Buon Consiglio">
-</div>
+<img src="chiesa2.png" alt="Illustrazione Basilica del Buon Consiglio" style="width:120px; height:90px; object-fit:contain;">
 <div class="location-details" >
-   <i class="fa-solid fa-location-dot"></i>
 <h2 class="venue-name">Basilica dell’Incoronata Madre del Buon Consiglio</h2>
 <p class="address">Via Capodimonte 13, Napoli</p>
+   <a href="https://www.google.it/maps/place/Basilica+of+the+Crowned+Mother+of+Good+Counsel+and+Queen+of+the+Catholic+Church/@40.8649994,14.2469316,17z/data=!3m2!4b1!5s0x133b087b1480bb21:0x202069aca76c99fb!4m6!3m5!1s0x133b087b12fa8291:0x5b8ca8d302e38fe8!8m2!3d40.8649994!4d14.2469316!16s%2Fm%2F026wfm_"
+  target="_blank"
+  class="info-button">
+                 Vedi sulla mappa
+            </a>
 </div>
 <img  class="stemmaChiesa-icon" src="stemmachiesa.png" alt="Stemma Araldico">
-</a>
 </div>
 </div>
 
@@ -868,7 +891,7 @@ body::before {
 
 <h1 class="section-title">Ricevimento</h1>
 
-<img src="villa2.png" alt="Illustrazione Basilica del Buon Consiglio" style="width:200px; height:120px; object-fit:cover;">
+<img src="villabordi.png" alt="Illustrazione Basilica del Buon Consiglio" style="width:100px; height:90px; object-fit:cover;">
 <div class="location-details">
 
 <h2 class="venue-name">Villa Soglia </h2>
@@ -987,44 +1010,44 @@ body::before {
     const opened = localStorage.getItem("invitoAperto") === "true";
     const time = localStorage.getItem("invitoApertoTime");
 
-    const TEN_MIN = 10 * 60 * 1000;
-
-    if (opened ) {
-
-      a4.style.opacity = "1";
-      a4.style.pointerEvents = "auto";
-    }
-
+    const TEN_MIN = 3 * 60 * 1000;
 
     if (opened ) {
     // salta effetto libro
    // book.style.display = "none";
     document.body.classList.remove("locked");
     document.body.classList.add("unlocked");
-
-    a4.style.opacity = "1";
     a4.style.pointerEvents = "auto";
+    book.style.display = "none";
+     a4.style.display = "block";
+    a4.style.opacity = "1";
     }
+     if (opened && Date.now() - time >= TEN_MIN) {
+         book.style.display = "block";
+    }
+
+
    btn.addEventListener("click", () => {
    document.body.classList.remove("locked");
     document.body.classList.add("unlocked");
-    localStorage.setItem("invitoAperto", "true");
-    localStorage.setItem("invitoApertoTime", Date.now());
-  rightPage.style.transform = "rotateY(120deg)";
 
-   a4.style.display = "block";
+    rightPage.style.transform = "rotateY(120deg)";
+ 
 
   rightPage.style.transform = "rotateY(120deg)";
 
+    a4.style.display = "block";
+    a4.style.opacity = "1";
   setTimeout(() => {
     leftPage.style.transform = "rotateY(-120deg)";
   }, 500);
-
   setTimeout(() => {
-    //localStorage.setItem("invitoAperto", "true");
-    //localStorage.setItem("invitoApertoTime", Date.now());
-   // book.style.display = "none"; 
+   localStorage.setItem("invitoAperto", "true");
+    localStorage.setItem("invitoApertoTime", Date.now());
+      book.style.display = "none"; 
   }, 5000);
+  
+
 });
   </script>
 
