@@ -17,12 +17,14 @@ body.locked{
   height: 100%;
 }
 
+
 body.unlocked .a4 {
   opacity: 1;
   pointer-events: auto;
 }
 
-html {  
+html {
+  
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -54,32 +56,7 @@ body::before {
   background-size: auto;
   opacity: 0.4; /* opacity SOLO del pattern */
 }
-/* body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
 
-  background-image: url("ripeti3.png");
-  background-repeat: repeat;
-  background-size: auto;
-
-  background-color: rgba(255, 255, 255, 0.6);
-  background-blend-mode: lighten;
-
-  pointer-events: none;
-  z-index: 0;
-} */
-
-/* body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url("ripeti1.png");
-  background-repeat: repeat;
-  background-size: auto;
-  opacity: 0.2;
-  z-index: -1;
-} */
 
 .primo{
     min-height: calc(100vh - 10px);
@@ -147,36 +124,6 @@ body::before {
   filter: brightness(1.1);
 }
 
-/* .right::before,
-.right::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 18px;
-     height:100dvh;;
-
-    background: linear-gradient(
-        180deg,
-        #e9d8b8 0%,
-        #c4a574 50%,
-        #e9d8b8 100%
-    );
-
-    box-shadow:
-        inset 2px 0 4px rgba(255,255,255,0.3),
-        inset -2px 0 4px rgba(0,0,0,0.2);
-
-    z-index: 15;
-} */
-/* 
-.right::before {
-    left: 0px;
-}
-
-.right::after {
-    left: 0px;
-} */
-
   #openBtnleft {
   position: absolute;
   top: 50%;
@@ -212,8 +159,6 @@ body::before {
   width: 100%;
   margin: 0 auto;
   z-index: 1;
-  opacity: 0;
-  display: none;
 }
 
 .top-image{
@@ -816,17 +761,6 @@ body::before {
 
 <body>
   <!-- BOOK -->
-   <div class="book">
-   
-      <div class="left" id="leftPage">
-       <img id="openBtnleft" src="cera.png" alt="Apri l'invito">
-      </div>
-      <div class="right" id="rightPage">
-          <img id="openBtn" src="cera.png" alt="Apri l'invito">
-
-      </div>
- 
-    </div>
 
   <!-- INVITO -->
  <div class="a4">
@@ -901,7 +835,7 @@ body::before {
                 accedendo alla pagina dedicata.
             </p>
 
-           <a href="partecipazione.html" onclick="sessionStorage.setItem('fromIndex','true')"
+           <a href="partecipazione.html"
                class="info-button">
                 Conferma la partecipazione
             </a>
@@ -941,7 +875,7 @@ body::before {
 
     <div class="info-content">
         <div class="info-image">
-            <img src="regalo.png" alt="Un pensiero" >
+            <img src="regalo.png" alt="Un pensiero">
         </div>
 
         <div class="info-text">
@@ -950,7 +884,7 @@ body::before {
                 Per chi lo desiderasse, abbiamo dedicato una pagina con ulteriori informazioni.
             </p>
 
-            <a href="regalo.html" onclick="sessionStorage.setItem('fromIndex','true')"
+            <a href="regalo.html"
                class="info-button">
                 Clicca qui per ulteriori informazioni
             </a>
@@ -982,7 +916,7 @@ body::before {
         }, 9000);
       });
     });
-    const book = document.querySelector(".book");
+
     const btn = document.getElementById("openBtn");
     const btnleft = document.getElementById("openBtnleft");
     const leftPage = document.querySelector(".left");
@@ -993,58 +927,26 @@ body::before {
 
     const TEN_MIN = 3 * 60 * 1000;
     console.error("opened", opened)
-  //   if (opened ) {
-  //   // salta effetto libro
-  //  // book.style.display = "none";
-  //   document.body.classList.remove("locked");
-  //   document.body.classList.add("unlocked");
-  //   a4.style.pointerEvents = "auto";
-  //   book.style.display = "none";
-  //    a4.style.display = "block";
-  //   a4.style.opacity = "1";
-  //   }
+
    btn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "instant" });
-document.documentElement.scrollTop = 0;
-document.body.scrollTop = 0;
-    book.style.display = "block";
-    document.body.classList.remove("locked");
-    document.body.classList.add("unlocked");
-
-    rightPage.style.transform = "rotateY(120deg)";
-    btnleft.style.display="none"
-    a4.style.display = "block";
-    a4.style.opacity = "1";
-
-    setTimeout(() => {
-      leftPage.style.transform = "rotateY(-120deg)";
-    }, 500);
-    setTimeout(() => {
-     localStorage.setItem("invitoApertoTime", Date.now());
-      localStorage.setItem("invitoAperto", "true");
-      book.style.display = "none"; 
-    }, 5000);
-  });
-console.log("fromIndex =", sessionStorage.getItem("fromIndex"));
-
-const fromIndex = sessionStorage.getItem("fromIndex");
-console.error("fromIndex", fromIndex)
-const navType = performance.getEntriesByType("navigation")[0]?.type;
-
-// mostra book SOLO se:
-const showBook =
-  navType === "navigate" || navType === "reload";
- console.error("showBook",showBook)
-if (!showBook || fromIndex === "true") {
-  book.style.display = "none";
-   console.error("book NON Visible")
+   
+   document.body.classList.remove("locked");
   document.body.classList.add("unlocked");
-   a4.style.opacity = "1";
-       a4.style.display = "block";
-} else {
-  console.error("bookVisible")
-  book.style.display = "block";
-}
+
+  rightPage.style.transform = "rotateY(120deg)";
+  btnleft.style.display="none"
+
+  setTimeout(() => {
+    leftPage.style.transform = "rotateY(-120deg)";
+  }, 500);
+  setTimeout(() => {
+     localStorage.setItem("invitoApertoTime", Date.now());
+   localStorage.setItem("invitoAperto", "true");
+      book.style.display = "none"; 
+  }, 5000);
+  
+
+});
   </script>
 
 </body>

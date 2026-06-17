@@ -13,6 +13,7 @@ html, body {
   padding: 0;
   height: 100%;
   background: transparent;
+   overflow-x: hidden;
 }
 
 /* CONTAINER PRINCIPALE */
@@ -83,7 +84,7 @@ html, body {
       border-bottom:1px solid #6B5D54;
       background:transparent;
       padding:10px 0;
-      font-size:clamp(18px, 3vh, 26px);
+      font-size:20px;
       margin-bottom:18px;
       color:#6B5D54;
       outline:none;
@@ -107,7 +108,7 @@ html, body {
   border: none;
   background: transparent;
   color: #6B5D54;
-  font-size: 20px;
+  font-size: 23px;
 }
 
 /* BOTTONI */
@@ -143,7 +144,7 @@ html, body {
 /* TESTO PRINCIPALE */
 .rsvp-step1 label {
   display: block;
-  font-size: 18px;
+  font-size: 23px;
   line-height: 1.6;
   color: #6B5D54;
   margin-bottom: 22px;
@@ -161,10 +162,11 @@ html, body {
 
 /* TITOLO IBAN */
 .iban-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: 1px;
-    font-family: 'Cormorant Garamond', serif;
+  font-family: 'Cormorant Garamond', serif;
+   color: #6B5D54;
 }
 
 /* INPUT IBAN */
@@ -176,7 +178,7 @@ html, body {
   border: 1px solid rgba(107,93,84,0.4);
   background: rgba(255,255,255,0.3);
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 20px;
   letter-spacing: 1px;
   color: #6B5D54;
     font-family: 'Cormorant Garamond', serif;
@@ -184,7 +186,7 @@ html, body {
 
 /* SUBTITLE */
 .iban-subtitle {
-  font-size: 15px;
+  font-size: 18px;
   opacity: 0.8;
     font-family: 'Cormorant Garamond', serif;
 }
@@ -207,7 +209,7 @@ html, body {
 }
 .message {
   display: block;
-  font-size: 18px;
+  font-size: 22px;
   line-height: 1.8;
   text-align: center;
   color: #6B5D54;
@@ -216,8 +218,7 @@ html, body {
 .note {
   display: block;
   margin-top: 12px;
-  font-size: 14px;
-  opacity: 0.75;
+  font-size: 18px;
   font-style: italic;
   line-height: 1.6;
 }
@@ -240,13 +241,10 @@ html, body {
       <label class="message">
   La vostra presenza nel nostro grande giorno  
   sarà per noi il pensiero più bello.
-
-  <br><br>
-
+  <br>
   Se avete il piacere di farci un regalo,  
   preferiamo conservarlo nel nostro salvadanaio.
-
-  <br><br>
+  <br>
 
    <span class="note">
     E quando in futuro lo useremo penseremo con gioia a voi e al vostro gesto
@@ -262,7 +260,7 @@ html, body {
          readonly>
 
   <div class="iban-subtitle">
-    Intestato a Manuele Messina e Tania Esposito e Alexandra Cucumetti
+    Intestato a Manuele Messina e Tania Esposito
   </div>
 
   <button type="button" onclick="copyIBAN()">
@@ -283,6 +281,7 @@ html, body {
 </div>
 
 <script>
+  console.log("fromIndex = regalo", sessionStorage.getItem("fromIndex"));
 function copyIBAN() {
   const iban = document.getElementById("ibanField");
   iban.select();
