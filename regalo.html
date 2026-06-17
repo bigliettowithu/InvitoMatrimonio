@@ -5,14 +5,13 @@
 <title>RSVP Matrimonio</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
 
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Playfair Display', serif;
   background: transparent;
 }
 
@@ -33,6 +32,26 @@ html, body {
   z-index: 0;
   pointer-events: none;
   user-select: none;
+}
+
+ .rsvp-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: min(700px, 92vw);
+
+  padding: 24px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 2;
 }
 
  .action-buttons{
@@ -58,37 +77,28 @@ html, body {
   box-shadow:0 6px 16px rgba(0,0,0,0.10);
 }
 
-/* OVERLAY CONTENUTO */
-    .rsvp-overlay{
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform:translate(-50%, -50%);
-      width:min(900px, 92vw);
-      padding:20px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      z-index:2;
+    .rsvp-step1 input{
+      width:100%;
+      border:none;
+      border-bottom:1px solid #6B5D54;
+      background:transparent;
+      padding:10px 0;
+      font-size:clamp(18px, 3vh, 26px);
+      margin-bottom:18px;
+      color:#6B5D54;
+      outline:none;
     }
 
 /* BOX CONTENUTO */
-.rsvp-step1 {
-  max-width: 620px;
-}
+ .rsvp-step1{
+      width:100%;
+      background:rgba(255,255,255,0.45);
+      backdrop-filter: blur(2px);
+      border:1px solid rgba(0,0,0,0.15);
+      border-radius:12px;
+      padding:18px;
+    }
 
-/* INPUT */
-.rsvp-step1 input{
-  width: 100%;
-  margin: 8px 0;
-  padding: 6px 8px;
-  border: none;
-  border-bottom: 1px solid #6B5D54;
-  background: transparent;
-  color: #6B5D54;
-  font-size: 2em;
-}
 
 .rsvp-step1 label{
   width: 100%;
@@ -97,7 +107,7 @@ html, body {
   border: none;
   background: transparent;
   color: #6B5D54;
-  font-size: 3em;
+  font-size: 20px;
 }
 
 /* BOTTONI */
@@ -115,6 +125,102 @@ html, body {
 .rsvp-step2 {
   display: none;
 }
+
+* {
+    font-family: 'Great Vibes', cursive;
+}
+
+.rsvp-step1 {
+  width: 100%;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(107,93,84,0.25);
+  border-radius: 16px;
+  padding: 26px;
+  text-align: center;
+}
+
+/* TESTO PRINCIPALE */
+.rsvp-step1 label {
+  display: block;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #6B5D54;
+  margin-bottom: 22px;
+}
+
+/* IBAN BOX */
+.iban-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* TITOLO IBAN */
+.iban-title {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* INPUT IBAN */
+.iban-container input {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+  padding: 12px;
+  border: 1px solid rgba(107,93,84,0.4);
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #6B5D54;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* SUBTITLE */
+.iban-subtitle {
+  font-size: 15px;
+  opacity: 0.8;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* BOTTONE COPIA */
+.iban-container button {
+  margin-top: 8px;
+  padding: 10px 18px;
+  border: 1px solid #6B5D54;
+  background: transparent;
+  color: #6B5D54;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.iban-container button:hover {
+  background: rgba(107,93,84,0.1);
+}
+.message {
+  display: block;
+  font-size: 18px;
+  line-height: 1.8;
+  text-align: center;
+  color: #6B5D54;
+}
+
+.note {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
+  opacity: 0.75;
+  font-style: italic;
+  line-height: 1.6;
+}
 </style>
 </head>
 
@@ -123,31 +229,52 @@ html, body {
 <div class="stage">
 
   <!-- SFONDO -->
-  <img class="bg" src="sfondo1.jpg" alt="Sfondo invito">
+  <img class="bg" src="sfondopartecipazione.jpg" alt="Sfondo invito" style=" object-fit:cover;">
+
 
   <!-- CONTENUTO SOPRA -->
   <div class="rsvp-overlay">
 
     <div class="rsvp-step1">
 
-      <label>
-        La vostra presenza sarà il dono più prezioso per noi
-      </label>
+      <label class="message">
+  La vostra presenza nel nostro grande giorno  
+  sarà per noi il pensiero più bello.
 
-      <div class="iban-container" style="margin-top:15px;">
-        <input type="text" id="ibanField"
-               value="IT00X0000000000000000000000"
-               readonly>
+  <br><br>
 
-        <button type="button" onclick="copyIBAN()">
-          Copia IBAN
-        </button>
-      </div>
+  Se avete il piacere di farci un regalo,  
+  preferiamo conservarlo nel nostro salvadanaio.
+
+  <br><br>
+
+   <span class="note">
+    E quando in futuro lo useremo penseremo con gioia a voi e al vostro gesto
+  </span>
+</label>
+
+     <div class="iban-container">
+  
+  <div class="iban-title">IBAN:</div>
+
+  <input type="text" id="ibanField"
+         value="IT00X0000000000000000000000"
+         readonly>
+
+  <div class="iban-subtitle">
+    Intestato a Manuele Messina e Tania Esposito e Alexandra Cucumetti
+  </div>
+
+  <button type="button" onclick="copyIBAN()">
+    Copia IBAN
+  </button>
+
+</div>
 
     </div>
  <div class="action-buttons">
           <a href="index.html" class="action-btn" aria-label="Torna indietro">
-            <i class="fa-solid fa-arrow-left"></i>
+            <i class="fa-solid fa-house"></i>
           </a>
         </div>
   </div>

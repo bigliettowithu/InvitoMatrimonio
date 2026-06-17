@@ -17,7 +17,6 @@
       width:100vw;
       height:100vh;
       box-sizing:border-box;
-      font-family:'Playfair Display', serif;
       color:#6B5D54;
     }
 
@@ -26,8 +25,6 @@
   padding: 0;
   min-height: 100vh;
   overflow-x: hidden;
-
-  font-family: 'Playfair Display', serif;
   background-attachment: scroll;
   background-size: 100% 50%;
 background-image: url("ripeti.jpg");
@@ -135,6 +132,9 @@ background-image: url("ripeti.jpg");
 }
 
 
+* {
+  font-family: 'Great Vibes';
+}
     .rsvp-step2{
       display:none;
       width:100%;
@@ -146,6 +146,53 @@ background-image: url("ripeti.jpg");
       border-radius:12px;
       padding:18px;
       font-size:clamp(16px, 2.6vh, 22px);
+    }
+
+       .rsvp-step-parteciperai{
+      display:none;
+      width:100%;
+      margin-top:14px;
+      text-align:left;
+      background:rgba(255,255,255,0.45);
+      backdrop-filter: blur(2px);
+      border:1px solid rgba(0,0,0,0.15);
+      border-radius:12px;
+      padding:18px;
+      font-size:clamp(16px, 2.6vh, 22px);
+       align-items: center; /* tutto centrato */
+
+    }
+
+
+ .rsvp-step-parteciperai label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:600;
+    }
+
+    .rsvp-step-parteciperai input,
+    .rsvp-step-parteciperai select,
+    .rsvp-step-parteciperai textarea{
+      font-size:clamp(16px, 2.6vh, 22px);
+      width:100%;
+      margin:8px 0;
+      padding:8px 0;
+      border:none;
+      border-bottom:1px solid #6B5D54;
+      background:transparent;
+      color:#6B5D54;
+      outline:none;
+    }
+
+    .rsvp-step-parteciperai button{
+      margin-top:12px;
+      padding:10px 22px;
+      border:1px solid #6B5D54;
+      background:transparent;
+      color:#6B5D54;
+      font-size:clamp(16px, 2.6vh, 22px);
+      cursor:pointer;
+      border-radius:10px;
     }
 
     .rsvp-step2 label{
@@ -246,6 +293,71 @@ background-image: url("ripeti.jpg");
   color:#6B5D54;
   box-shadow:0 6px 16px rgba(0,0,0,0.10);
 }
+
+.buttons-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  width: 100%;
+}
+
+.back-btn {
+  align-self: flex-start; /* 👈 solo lui a sinistra */
+  cursor: pointer;
+  margin-top: 12px;
+}
+.step-title {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-align: center;
+  color: #6B5D54;
+}
+
+.top-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap; /* se schermo piccolo va a capo */
+  text-align: center;
+   align-items: baseline;
+}
+.buttonsconfirm {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.same-text {
+  font-size: 22px;   /* stessa dimensione */
+  font-weight: 600;  /* stessa pesantezza */
+  color: #6B5D54;
+  padding: 0;
+  margin: 0;
+}
+
+.actions {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* centra Invio */
+  align-items: center;
+}
+
+.back-btn2 {
+  position: absolute;
+  left: 0; /* forza sinistra */
+  cursor: pointer;
+}
+
+.send-btn {
+  padding: 10px 22px;
+  border: 1px solid #6B5D54;
+  background: transparent;
+  color: #6B5D54;
+  border-radius: 10px;
+}
   </style>
 </head>
 
@@ -258,12 +370,27 @@ background-image: url("ripeti.jpg");
     <div class="a4">
       <div class="rsvp-overlay">
         <div class="rsvp-step1">
-          <input type="text" id="rsvpName" placeholder="Inserisci Nome e Cognome" oninput="checkName()">
+           <div class="step-title">Inserisci i tuoi dati</div>
+          <input type="text" id="rsvpName" placeholder="Nome" oninput="checkName()">
+           <input type="text" id="rsvpCognome" placeholder="Cognome" oninput="checkName()">
           <div>
-            <label>Parteciperai?</label>
-            <button id="yesBtn" onclick="showStep2(true)">Sì</button>
-            <button id="noBtn" onclick="sendNo()">No</button>
+            <button id="okBtn" onclick="showStepParteciperai(true)">Continua</button>
           </div>
+        </div>
+
+        <div class="rsvp-step-parteciperai" id="rsvp-step-parteciperai">
+          
+          <div>
+           <div class="top-row">
+  <div id="nomeInserito" class="same-text"></div>
+  <label class="same-text">parteciperai?</label>
+</div>
+             <div class="buttonsconfirm">
+    <button id="yesBtn" onclick="showStep2(true)">Sì</button>
+    <button id="noBtn" onclick="sendNo()">No</button>
+  </div>
+          </div>
+          <div class="back-btn" onclick="goBackToStep1()">← Indietro</div>
         </div>
 
         <div class="rsvp-step2" id="step2">
@@ -277,13 +404,15 @@ background-image: url("ripeti.jpg");
             <div id="partecipantiContainer"></div>
             <button type="button" onclick="addPartecipante()">Aggiungi partecipante</button>
           </div>
-
-          <button onclick="sendYes()">Invia</button>
+         <div class="actions">
+  <div class="back-btn2" onclick="goBackToStepParteciperai()">← Indietro</div>
+  <button class="send-btn" onclick="sendYes()">Invia</button>
+</div>
         </div>
 
         <div class="action-buttons">
           <a href="index.html" class="action-btn" aria-label="Torna indietro">
-            <i class="fa-solid fa-arrow-left"></i>
+            <i class="fa-solid fa-house"></i>
           </a>
         </div>
       </div>
@@ -307,15 +436,30 @@ background-image: url("ripeti.jpg");
       }
     }
 
+
+  function showStepParteciperai(isYes){
+    const name = document.getElementById("rsvpName").value.trim();
+     const cognome = document.getElementById("rsvpCognome").value.trim();
+    if(!name || !cognome){ alert("Inserisci Nome e Cognome"); return; }
+    document.getElementById("nomeInserito").textContent = name;
+  if(isYes){
+    document.getElementById("rsvp-step-parteciperai").style.display = "block";
+  } else {
+    sendNo();
+  }
+
+  document.querySelector(".rsvp-step1").style.display = "none";
+}
+
     function showStep2(isYes){
       const name = document.getElementById("rsvpName").value.trim();
-      if(!name){ alert("Inserisci Nome e Cognome"); return; }
       if(isYes){
         document.getElementById("step2").style.display="block";
       } else {
         sendNo();
       }
-      document.querySelector(".rsvp-step1").style.display="none";
+
+      document.querySelector(".rsvp-step-parteciperai").style.display="none";
     }
 
     function toggleExtra(){
@@ -369,6 +513,16 @@ ${extraMsg}`;
 
       window.open("https://wa.me/393892043551?text="+encodeURIComponent(msg), "_blank");
     }
-  </script>
+ 
+    function goBackToStep1() {
+  document.querySelector(".rsvp-step-parteciperai").style.display = "none";
+  document.querySelector(".rsvp-step1").style.display = "block";
+}
+
+function goBackToStepParteciperai() {
+  document.getElementById("step2").style.display = "none";
+  document.querySelector(".rsvp-step-parteciperai").style.display = "block";
+}
+ </script>
 </body>
 </html>
