@@ -46,7 +46,7 @@ body::before {
   inset: 0;
   pointer-events: none;
 
-  background-image: url("ripeti1.jpg");
+  background-image: url("ripeti4.jpg");
   background-repeat: repeat;
   background-attachment: scroll;
 
@@ -54,32 +54,6 @@ body::before {
   background-size: auto;
   opacity: 0.4; /* opacity SOLO del pattern */
 }
-/* body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-
-  background-image: url("ripeti3.png");
-  background-repeat: repeat;
-  background-size: auto;
-
-  background-color: rgba(255, 255, 255, 0.6);
-  background-blend-mode: lighten;
-
-  pointer-events: none;
-  z-index: 0;
-} */
-
-/* body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url("ripeti1.png");
-  background-repeat: repeat;
-  background-size: auto;
-  opacity: 0.2;
-  z-index: -1;
-} */
 
 .primo{
     min-height: calc(100vh - 10px);
@@ -125,7 +99,7 @@ body::before {
     transition: transform 2.2s cubic-bezier(.77,0,.18,1);
     transform-style: preserve-3d;
     backface-visibility:hidden;
-     background-image: url("init.png");
+     background-image: url("centrale.png");
   background-repeat: no-repeat;
   background-size: 200% 100%;
 }
@@ -136,7 +110,7 @@ body::before {
   transform-origin: left center;
  
   background-position: left center;
-  filter: brightness(1.1);
+  
 
 }
 
@@ -144,7 +118,7 @@ body::before {
     right:0;
     transform-origin:right center;
   background-position: right center;
-  filter: brightness(1.1);
+
 }
 
 /* .right::before,
@@ -230,7 +204,6 @@ body::before {
   object-fit: cover; /* meglio di contain per effetto “banner” */
   display: block;
 
-  filter: brightness(0.98) contrast(1.03);
 }
 
 /* SEZIONI */
@@ -811,22 +784,25 @@ body::before {
     font-size: 26px;
     color: #70675c;
 }
+
 </style>
 </head>
 
 <body>
   <!-- BOOK -->
-   <div class="book">
-   
-      <div class="left" id="leftPage">
-       <img id="openBtnleft" src="cera.png" alt="Apri l'invito">
-      </div>
-      <div class="right" id="rightPage">
-          <img id="openBtn" src="cera.png" alt="Apri l'invito">
+<div class="book">
 
-      </div>
+  <div class="left" id="leftPage">
  
-    </div>
+    <img id="openBtnleft" src="cera.png">
+  </div>
+
+  <div class="right" id="rightPage">
+ 
+    <img id="openBtn" src="cera.png">
+  </div>
+
+</div>
 
   <!-- INVITO -->
  <div class="a4">
