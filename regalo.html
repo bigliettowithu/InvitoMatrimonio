@@ -2,62 +2,145 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>RSVP Matrimonio</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  background: transparent;
-   overflow-x: hidden;
+html, body{
+  margin:0;
+  padding:0;
+  width:100vw;
+  height:100vh;
+  box-sizing:border-box;
+  color:#6B5D54;
+  overflow-x:hidden;
 }
 
-/* CONTAINER PRINCIPALE */
-.stage {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
+*, *::before, *::after{
+  box-sizing:inherit;
+  font-family:'Great Vibes';
+}
+
+/* STAGE */
+.stage{
+  position:relative;
+  min-height:100vh;
 }
 
 /* SFONDO */
-.bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-  pointer-events: none;
-  user-select: none;
+.bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+  pointer-events:none;
+  user-select:none;
 }
 
-    .rsvp-overlay{
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform:translate(-50%, -50%);
-      width:min(900px, 92vw);
-      padding:20px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      z-index:2;
-    }
-
- .action-buttons{
+/* CONTENITORE */
+.a4{
+  position:relative;
   display:flex;
-  flex-direction:row;
-  justify-content:center;   /* 👈 QUESTO è quello che ti manca */
-  align-items:center;
-  gap:20px;
+  justify-content:center;
+  align-items:flex-start;
+  min-height:100vh;
+}
 
+/* OVERLAY */
+.rsvp-overlay{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:min(900px, 92vw);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  z-index:2;
+}
+
+/* BOX */
+.rsvp-step1{
   width:100%;
-  margin-top:30px;
+  background:rgba(255,255,255,0.45);
+  backdrop-filter:blur(2px);
+  border:1px solid rgba(0,0,0,0.15);
+  border-radius:12px;
+  padding:22px;
+  text-align:center;
+}
+
+/* TESTO */
+.message{
+  display:block;
+  font-size:clamp(18px, 2.6vh, 24px);
+  line-height:1.6;
+  color:#6B5D54;
+}
+
+.note{
+  display:block;
+  margin-top:10px;
+  font-size:clamp(16px, 2.2vh, 20px);
+  font-style:italic;
+}
+
+/* IBAN */
+.iban-container{
+    font-family: 'Cormorant Garamond', serif;
+  margin-top:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+}
+
+.iban-title{
+  font-size:16px;
+  font-weight:600;
+  letter-spacing:1px;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.iban-container input{
+  width:100%;
+  max-width:360px;
+  text-align:center;
+  padding:12px;
+  border:1px solid rgba(107,93,84,0.4);
+  background:rgba(255,255,255,0.3);
+  border-radius:10px;
+  font-size:18px;
+  color:#6B5D54;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.iban-subtitle{
+  font-size:16px;
+  opacity:0.85;
+}
+
+/* BUTTON */
+.iban-container button{
+  padding:10px 18px;
+  border:1px solid #6B5D54;
+  background:transparent;
+  color:#6B5D54;
+  border-radius:10px;
+  cursor:pointer;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* HOME BUTTON */
+.action-buttons{
+  display:flex;
+  justify-content:center;
+  margin-top:25px;
 }
 
 .action-btn{
@@ -72,151 +155,6 @@ html, body {
   color:#6B5D54;
   box-shadow:0 6px 16px rgba(0,0,0,0.10);
 }
-
-    .rsvp-step1 input{
-      width:100%;
-      border:none;
-      border-bottom:1px solid #6B5D54;
-      background:transparent;
-      padding:10px 0;
-      font-size:20px;
-      margin-bottom:18px;
-      color:#6B5D54;
-      outline:none;
-    }
-
-/* BOX CONTENUTO */
- .rsvp-step1{
-      width:100%;
-      background:rgba(255,255,255,0.45);
-      backdrop-filter: blur(2px);
-      border:1px solid rgba(0,0,0,0.15);
-      border-radius:12px;
-      padding:18px;
-    }
-
-
-.rsvp-step1 label{
-  width: 100%;
-  margin: 8px 0;
-  padding: 6px 8px;
-  border: none;
-  background: transparent;
-  color: #6B5D54;
-  font-size: 23px;
-}
-
-/* BOTTONI */
-.rsvp-step1 button,
-.rsvp-step2 button {
-  padding: 8px 20px;
-  margin: 5px;
-  border: 1px solid #6B5D54;
-  background: transparent;
-  color: #6B5D54;
-  cursor: pointer;
-}
-
-/* STEP 2 (se lo usi dopo) */
-.rsvp-step2 {
-  display: none;
-}
-
-* {
-    font-family: 'Great Vibes', cursive;
-}
-
-.rsvp-step1 {
-  width: 100%;
-  background: rgba(255,255,255,0.55);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(107,93,84,0.25);
-  border-radius: 16px;
-  padding: 26px;
-  text-align: center;
-}
-
-/* TESTO PRINCIPALE */
-.rsvp-step1 label {
-  display: block;
-  font-size: 23px;
-  line-height: 1.6;
-  color: #6B5D54;
-  margin-bottom: 22px;
-}
-
-/* IBAN BOX */
-.iban-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-top: 20px;
-    font-family: 'Cormorant Garamond', serif;
-}
-
-/* TITOLO IBAN */
-.iban-title {
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  font-family: 'Cormorant Garamond', serif;
-   color: #6B5D54;
-}
-
-/* INPUT IBAN */
-.iban-container input {
-  width: 100%;
-  max-width: 360px;
-  text-align: center;
-  padding: 12px;
-  border: 1px solid rgba(107,93,84,0.4);
-  background: rgba(255,255,255,0.3);
-  border-radius: 10px;
-  font-size: 20px;
-  letter-spacing: 1px;
-  color: #6B5D54;
-    font-family: 'Cormorant Garamond', serif;
-}
-
-/* SUBTITLE */
-.iban-subtitle {
-  font-size: 18px;
-  opacity: 0.8;
-    font-family: 'Cormorant Garamond', serif;
-}
-
-/* BOTTONE COPIA */
-.iban-container button {
-  margin-top: 8px;
-  padding: 10px 18px;
-  border: 1px solid #6B5D54;
-  background: transparent;
-  color: #6B5D54;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.2s ease;
-  font-family: 'Cormorant Garamond', serif;
-}
-
-.iban-container button:hover {
-  background: rgba(107,93,84,0.1);
-}
-.message {
-  display: block;
-  font-size: 22px;
-  line-height: 1.8;
-  text-align: center;
-  color: #6B5D54;
-}
-
-.note {
-  display: block;
-  margin-top: 12px;
-  font-size: 18px;
-  font-style: italic;
-  line-height: 1.6;
-}
 </style>
 </head>
 
@@ -224,67 +162,66 @@ html, body {
 
 <div class="stage">
 
-  <!-- SFONDO -->
-  <img class="bg" src="sfondopartecipazione.jpg" alt="Sfondo invito" style=" object-fit:cover;">
+  <img class="bg" src="sfondopartecipazione.jpg" alt="sfondo">
 
+  <div class="a4">
 
-  <!-- CONTENUTO SOPRA -->
-  <div class="rsvp-overlay">
+    <div class="rsvp-overlay">
 
-    <div class="rsvp-step1">
+      <div class="rsvp-step1">
 
-      <label class="message">
-  La vostra presenza nel nostro grande giorno  
-  sarà per noi il pensiero più bello.
-  <br>
-  Se avete il piacere di farci un regalo,  
-  preferiamo conservarlo nel nostro salvadanaio.
-  <br>
+        <div class="message">
+          La vostra presenza nel nostro grande giorno sarà per noi il pensiero più bello.<br><br>
 
-   <span class="note">
-    E quando in futuro lo useremo penseremo con gioia a voi e al vostro gesto
-  </span>
-</label>
+          Se avete il piacere di farci un regalo, preferiamo conservarlo nel nostro salvadanaio.<br><br>
 
-     <div class="iban-container">
-  
-  <div class="iban-title">IBAN:</div>
+          <span class="note">
+            E quando in futuro lo useremo penseremo con gioia a voi e al vostro gesto
+          </span>
+        </div>
 
-  <input type="text" id="ibanField"
-         value="IT00X0000000000000000000000"
-         readonly>
+        <div class="iban-container">
 
-  <div class="iban-subtitle">
-    Intestato a Manuele Messina e Tania Esposito
-  </div>
+          <div class="iban-title">IBAN</div>
 
-  <button type="button" onclick="copyIBAN()">
-    Copia IBAN
-  </button>
+          <input type="text" id="ibanField"
+                 value="IT00X0000000000000000000000"
+                 readonly>
 
-</div>
+          <div class="iban-subtitle">
+            Intestato a Manuele Messina e Tania Esposito
+          </div>
+
+          <button onclick="copyIBAN()">Copia IBAN</button>
+
+        </div>
+
+      </div>
+
+      <a href="index.html" class="action-btn" aria-label="Torna indietro">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+       stroke="currentColor" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 10.5L12 3l9 7.5"></path>
+    <path d="M5 10v10h5v-6h4v6h5V10"></path>
+  </svg>
+</a>
 
     </div>
- <div class="action-buttons">
-          <a href="index.html" class="action-btn" aria-label="Torna indietro">
-            <i class="fa-solid fa-house"></i>
-          </a>
-        </div>
+
   </div>
-   
 
 </div>
 
 <script>
-  console.log("fromIndex = regalo", sessionStorage.getItem("fromIndex"));
-function copyIBAN() {
+function copyIBAN(){
   const iban = document.getElementById("ibanField");
   iban.select();
-  iban.setSelectionRange(0, 99999);
+  iban.setSelectionRange(0,99999);
 
   navigator.clipboard.writeText(iban.value)
-    .then(() => alert("IBAN copiato negli appunti!"))
-    .catch(() => alert("Impossibile copiare l'IBAN."));
+    .then(()=>alert("IBAN copiato"))
+    .catch(()=>alert("Errore copia"));
 }
 </script>
 
