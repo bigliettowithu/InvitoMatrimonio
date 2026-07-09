@@ -491,14 +491,16 @@ background-image: url("ripeti.jpg");
 
     function sendNo(){
       const name = document.getElementById("rsvpName").value.trim();
-      if(!name){ alert("Inserisci Nome e Cognome"); return; }
-      const msg = `Ciao! Sono ${name} e purtroppo non potrò partecipare al matrimonio 💌`;
+       const cognome = document.getElementById("rsvpCognome").value.trim();
+      if(!name || cognome ){ alert("Inserisci Nome e Cognome"); return; }
+      const msg = `Ciao! Sono ${name} ${cognome} e purtroppo non potrò partecipare al matrimonio 💌`;
       window.open("https://wa.me/393892043551?text="+encodeURIComponent(msg), "_blank");
     }
 
     function sendYes(){
       const name = document.getElementById("rsvpName").value.trim();
-      if(!name){ alert("Inserisci Nome e Cognome"); return; }
+      const cognome = document.getElementById("rsvpCognome").value.trim();
+      if(!name || cognome ){ alert("Inserisci Nome e Cognome"); return; }
 
       const extraElems = document.querySelectorAll("#partecipantiContainer .partecipante");
       let extraMsg = "";
@@ -511,6 +513,7 @@ background-image: url("ripeti.jpg");
 
       const msg = `Conferma partecipazione matrimonio 💍
 Nome: ${name}
+Cognome: ${cognome}
 Partecipanti aggiuntivi:
 ${extraMsg}`;
 
