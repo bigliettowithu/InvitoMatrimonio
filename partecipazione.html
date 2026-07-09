@@ -506,7 +506,10 @@ background-image: url("ripeti.jpg");
     return;
   }
 
-      let extraMsg = "Nessuno";
+      let extraMsg = "";
+      if (extraElems.length === 0){
+        extraMsg= "Nessuno"
+      }
 
       extraElems.forEach(el => {
         const n = el.querySelector("input").value.trim();
