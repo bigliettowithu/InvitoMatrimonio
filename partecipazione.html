@@ -501,7 +501,12 @@ background-image: url("ripeti.jpg");
       const cognome = document.getElementById("rsvpCognome").value.trim();
 
       const extraElems = document.querySelectorAll("#partecipantiContainer .partecipante");
-      let extraMsg = "";
+        if (compagnia === "compagnia" && extraElems.length === 0) {
+    alert("Hai selezionato 'In compagnia'. Aggiungi almeno un partecipante prima di inviare.");
+    return;
+  }
+
+      let extraMsg = "Nessuno";
 
       extraElems.forEach(el => {
         const n = el.querySelector("input").value.trim();
